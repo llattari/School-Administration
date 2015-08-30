@@ -1,0 +1,12 @@
+#content{
+    display:block;
+    border:2px solid black;
+}
+
+#mainContent{
+    padding:0.5em 5%;
+    border-top: 1px solid black;
+    text-align: justify;
+    max-width:100%;
+    width:90%;
+}

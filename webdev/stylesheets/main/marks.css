@@ -1,0 +1,24 @@
+#allMarks{
+}
+
+.markInvisible{
+    display:none;
+}
+
+.markVisible{
+}
+
+table, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width:90%;
+    text-align: center;
+    margin:auto;
+}
+
+thead{
+    font-weight: bold;
+}

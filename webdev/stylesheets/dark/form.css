@@ -1,0 +1,10 @@
+/* Formating a form */
+input, textarea{
+    background-color: black;
+}
+
+input{
+    color:white;
+    border: 1px solid white;
+    padding: 5px;
+}

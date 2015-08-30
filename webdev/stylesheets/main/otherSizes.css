@@ -1,0 +1,52 @@
+@media (max-width:29em){
+
+    #clock, #date {
+        display: none;
+    }
+
+    #content{
+        display:block;
+        border:2px solid black;
+    }
+
+    #menu{
+        display:inline;
+    }
+
+    #menu h1{
+        display:none;
+    }
+
+    #menu ul{
+        background-color:#00ffff;
+        list-style:none;
+        display:block;
+        padding-left: 0em;
+    }
+
+    #menu ul li .current:not(:hover), #menu ul li:hover{
+        display:block;
+        background-color:silver;
+        border-left:.5em solid orange;
+    }
+
+    #mainContent{
+        padding:0.5em 5%;
+        border-top: 1px solid black;
+        text-align: justify;
+        max-width:100%;
+    }
+}
+
+@media (min-width:93.75em){
+    *{
+        font-size: 1.1em;
+    }    
+
+    #menu ul{
+        /*Defining Columns*/
+        column-count:4;
+        -webkit-column-count:4;
+        -moz-column-count:4;
+    }
+}

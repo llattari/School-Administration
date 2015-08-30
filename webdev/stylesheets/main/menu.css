@@ -1,0 +1,42 @@
+/* Menu Bar */
+nav{
+    line-height: 1;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+}
+
+#menu ul{
+    font-size: 100%;
+    list-style: none;
+}
+
+#menu ul li{
+    background-color: #C1C09F;
+    display: inline;
+    float: left;
+    font-size: 100%;
+    width: 14.2857%;
+}
+
+#menu ul li.active, #menu ul li:hover ul{
+    background-color: #797863;
+    display:block;
+}
+
+#menu ul li.active{ font-weight: bold; }
+
+#menu ul li a{
+    display: block;
+    padding: .5em;
+    text-decoration: none;
+}
+
+#menu ul li ul{ display: none; }
+
+#menu ul li ul li{
+    display: block;
+    width: 100%;
+}

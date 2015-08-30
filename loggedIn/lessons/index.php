@@ -1,0 +1,97 @@
+<?php
+require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
+require_once '../../webdev/php/Classes/ClassClass.php';
+require_once '../../webdev/php/Classes/ClassPerson.php';
+require_once '../../webdev/php/Classes/Lesson.php';
+
+use \HTMLGenertator;
+
+#Initing objects
+$HTML = new HTMLGenertator\HTMLfile('Your class', ['table.css', 'form.css', 'lesson.css'], NULL, NULL, 1);
+$lesson = new Lesson($_SESSION['studentId'], strtotime('14.5.2015 15:30'));
+
+$HTML->outputHeader();
+if(!$lesson->takesPlace()){
+    ?>
+    <h1>No lesson</h1>
+    <p>You have some time off. Enjoy it. :D </p>
+    <?php
+    $HTML->outputFooter();
+    return;
+}
+?>
+<h1>Your current lesson</h1>
+<p class="twoCols">
+    Name: <?php echo $lesson->getClassName(); ?>
+    by <?php echo ClassPerson::STATICgetName($lesson->getTeacherId()); ?>
+    <br />
+    Takes place at: <?php echo $lesson->getLocation(); ?>
+    <br />
+    Started: <?php echo $lesson->getStartingTime(); ?> o'clock
+    <br />
+    Ends: <?php echo $lesson->getEndingTime(); ?> o'clock
+</p>
+<h2>Student list</h2>
+<?php
+if($_SESSION['teacher']){
+    echo '<form method="POST" class="centerMargin">
+          Topic: <input type="text" placeholder="Set topic of the lesson" id="lessonTopic" />';
+}
+?>
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+	    <?php
+	    if($_SESSION['teacher']){
+		echo '<td>Attending</td>
+                    <td>Homework</td>';
+	    }
+	    ?>
+            <td>Mail</td>
+        </tr>
+    </thead>
+    <?php
+    //Querying all the students
+    $result = safeQuery(
+	    'SELECT
+            user__overview.id AS "id",
+            CONCAT(`name`,\' \',surname) AS "name"
+        FROM
+            course__student
+        JOIN user__overview
+            ON user__overview.id = course__student.studentID
+        WHERE
+            classID = ' . $lesson->getClassId() . '
+	ORDER BY
+	    status DESC, surname ASC;'
+    );
+    //Outputting them in a table
+    $img = '<img src="' . getRootURL('../webdev/images/mail.png') . '" title="Mailsymbol" style="height:1em"/>';
+    while($row = mysql_fetch_assoc($result)){
+	echo '<tr>';
+	echo '<td><a href="' . getRootURL('profile/profile.php') . '?id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+	if($_SESSION['teacher']){
+	    echo
+	    '<td><input type="checkbox" checked="checked" name="attend" /></td>
+            <td><input type="checkbox" checked="checked" name="homework" /></td>';
+	}
+	echo '<td>';
+	if($_SESSION['studentId'] != $row['id']){
+	    echo '<a href="../mails/write.php?receiver=' . $row['id'] . '">' . $img . '</a>';
+	}else{
+	    echo 'X';
+	}
+	echo '</td></tr>';
+    }
+    ?>
+</table>
+<?php
+if($_SESSION['teacher']){
+    echo
+    '<br />
+    <button type="submit">Submit changes</button>
+    </form>';
+}
+$HTML->outputFooter();
+?>

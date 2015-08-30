@@ -1,0 +1,28 @@
+#mDate{
+    margin-right:0.5em;
+    margin-top:-1.5em;
+    float: right;
+}
+
+#messageContent{
+    text-align: justify;
+}
+
+/* Classes */
+.u{
+    text-decoration: underline;
+}
+
+.unread{
+    font-weight: bold;
+}
+
+.delete, .delete a{
+    color: red;
+    text-decoration: none;
+}
+
+/* Tags */
+thead{
+    text-decoration: none;
+}

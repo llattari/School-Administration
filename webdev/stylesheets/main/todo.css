@@ -1,0 +1,44 @@
+/* Formating the filter bar */
+#filter{
+    min-width: 227px;
+    width: 20%;
+}
+
+.right{
+    width: 80%;
+}
+
+#filter form{
+    margin-left: 2em;
+}
+
+/* Formating the entries */
+.unDone *{
+    color: red;
+}
+
+.done *{
+    color: green;
+}
+
+/* Formating the table */
+table{
+    width: 95%;
+    margin-left: 0px;
+}
+
+.dateCol, .prioCol{
+    min-width: 5.625em;
+}
+
+.dateCol{
+    width: 10%;
+}
+
+.typeCol{
+    width: 15%;
+}
+
+.prioCol{
+    width: 15%;
+}

@@ -1,0 +1,11 @@
+.marked{
+    background-color: red;
+}
+
+.outDated{
+    color: #cccccc;
+}
+
+td{
+    width: 5em;
+}

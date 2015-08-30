@@ -1,0 +1,58 @@
+/* General defintions */
+* {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 100%;
+    margin: 0em;
+    padding: 0;
+}
+
+h1, h2, h3{
+    font-size: 150%;
+    text-align: center;
+}
+
+body{ background-color: #F2F1C7; }
+
+a{ color:black;}
+
+/* Content */
+
+#content {
+    margin: 2.8em auto;
+    width: 90%;
+}
+
+#mainContent {
+    background-color: rgba(0,0,0,0.4);
+    padding-bottom: .5em;
+}
+
+#mainContent p{
+    padding: .5em;
+    padding-top: 0em;
+}
+
+#mainContent ul, #mainContent ul li{ margin-left: .5em; }
+
+/* Defining Columns */
+.twoCols{
+    column-count:2;
+    -webkit-column-count:2;
+    -moz-column-count:2;
+    column-gap:1em;
+    -webkit-column-gap:1em;
+    -moz-column-gap:1em;
+}
+
+.left{
+    float: left;
+    width: 30%;
+}
+
+.right{
+    float: right;
+    width: 70%;
+}
+
+/* Centering a block object */
+.centerMargin{ margin:auto; }

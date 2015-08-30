@@ -1,0 +1,46 @@
+form{
+    line-height: 2;
+    width: 90%;
+}
+
+form table{
+    width:100%;
+    line-height: 1.5;
+}
+
+fieldset{
+    border: none;
+}
+
+fieldset *{
+    margin-left: 1em;
+}
+
+legend{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Formating the input methods */
+input{
+    width: 40%;
+}
+
+textarea{
+    width: 80%;
+    margin-left: 1em;
+}
+
+select{
+    background-color: black;
+    min-width: 10em;
+    text-align: center;
+}
+
+button{
+    min-width: 5em;
+    margin-top: .2em;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 1em;
+}
