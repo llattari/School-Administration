@@ -1,0 +1,20 @@
+#mainContent{
+    padding-top: 10px;
+}
+
+#chatMessages{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height: 1.5;
+    margin-left: .5em;
+    padding: .5em 0em;
+    width: 100%;
+}
+
+.left{
+    width: 80%;
+}
+
+.right{
+    width: 15%;
+}
