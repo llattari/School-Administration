@@ -15,6 +15,7 @@
 
 .unread{
     font-weight: bold;
+    font-size: 110%;
 }
 
 .delete, .delete a{
@@ -24,5 +25,9 @@
 
 /* Tags */
 thead{
+    text-decoration: none;
+}
+
+tbody td a{
     text-decoration: none;
 }

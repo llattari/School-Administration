@@ -4,8 +4,6 @@ require_once '../webdev/php/Classes/Mark.php';
 require_once '../webdev/php/Classes/ClassClass.php';
 require_once '../webdev/php/Generators/HTMLGenerator/Generator.php';
 
-use MarkAdministration;
-
 //Setting variables
 $week = Array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 $HTML = new HTMLGenertator\HTMLfile('Classes', ['table.css'], ['selectionToggle.js']);

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <coverage xmlns="http://www.netbeans.org/ns/code-coverage/1" enabled="false"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/media/WebDev/Schulverwaltung/webdev/stylesheets/main/chat.css</file>
-            <file>file:/media/WebDev/Schulverwaltung/loggedIn/friends/chat.php</file>
-            <file>file:/media/WebDev/Schulverwaltung/loggedIn/friends/sendChatMessage.php</file>
-            <file>file:/media/WebDev/Schulverwaltung/webdev/stylesheets/dark/chat.css</file>
+            <file>file:/B:/Schulverwaltung/loggedIn/admin/createUser.php</file>
         </group>
     </open-files>
 </project-private>

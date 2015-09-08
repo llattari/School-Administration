@@ -1,26 +1,14 @@
 <?php
 require_once('../../webdev/php/Generators/HTMLGenerator/Generator.php');
-$HTML = new HTMLGenertator\HTMLfile('Chat with your friends', ['chat.css', 'form.css'], NULL, NULL, 1);
+$HTML = new HTMLGenertator\HTMLfile('Chat with your friends', ['chat.css', 'form.css'], ['refreshIFrame.js'], NULL, 1);
 $HTML->outputHeader();
 ?>
 <!-- Receiving chat messages -->
 <div class="left">
     <h2>Messages</h2>
     <div id="chatMessages">
-	<?php
-	$result = safeQuery(
-		'SELECT
-		    message, user.username AS "sender", sendDate
-		FROM chat__messages
-		JOIN user__overview user
-		ON chat__messages.sender = user.id
-		LIMIT 100;');
-	$rowCount = mysql_num_rows($result);
-	while($row = mysql_fetch_assoc($result)){
-	    $time = date('H:i', strtotime($row['sendDate']));
-	    echo'<span>[' . $time . '] ' . $row['sender'] . ': ' . $row['message'] . '</span><br />';
-	}
-	?>
+	<iframe src="chatMessages.php#end" width="100%" onload="startChat()">
+	</iframe>
     </div>
     <br />
     <!-- Sending chat messages -->

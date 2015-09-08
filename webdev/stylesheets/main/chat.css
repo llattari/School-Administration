@@ -3,8 +3,6 @@
 }
 
 #chatMessages{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
     line-height: 1.5;
     margin-left: .5em;
     padding: .5em 0em;
@@ -17,4 +15,13 @@
 
 .right{
     width: 15%;
+}
+
+/* Formating the iframe */
+
+iframe{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 0px;
 }
