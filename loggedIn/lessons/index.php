@@ -4,14 +4,12 @@ require_once '../../webdev/php/Classes/ClassClass.php';
 require_once '../../webdev/php/Classes/ClassPerson.php';
 require_once '../../webdev/php/Classes/Lesson.php';
 
-use \HTMLGenertator;
-
 #Initing objects
 $HTML = new HTMLGenertator\HTMLfile('Your class', ['table.css', 'form.css', 'lesson.css'], NULL, NULL, 1);
 $lesson = new Lesson($_SESSION['studentId'], strtotime('14.5.2015 15:30'));
 
 $HTML->outputHeader();
-if(!$lesson->takesPlace()){
+if (!$lesson->takesPlace()) {
     ?>
     <h1>No lesson</h1>
     <p>You have some time off. Enjoy it. :D </p>
@@ -23,7 +21,7 @@ if(!$lesson->takesPlace()){
 <h1>Your current lesson</h1>
 <p class="twoCols">
     Name: <?php echo $lesson->getClassName(); ?>
-    by <?php echo ClassPerson::STATICgetName($lesson->getTeacherId()); ?>
+    by <?php echo ClassPerson::staticGetName($lesson->getTeacherId()); ?>
     <br />
     Takes place at: <?php echo $lesson->getLocation(); ?>
     <br />
@@ -33,9 +31,11 @@ if(!$lesson->takesPlace()){
 </p>
 <h2>Student list</h2>
 <?php
-if($_SESSION['teacher']){
-    echo '<form method="POST" class="centerMargin">
-          Topic: <input type="text" placeholder="Set topic of the lesson" id="lessonTopic" />';
+if ($_SESSION['teacher']) {
+    echo '<form method="POST" class="centerMargin" action="setAttendence.php">
+	<!-- Hidden fields -->
+	<input type="hidden" value="' . $lesson->getId() . '" name="lessonId" />
+	Topic: <input type="text" placeholder="Set topic of the lesson" id="lessonTopic" />';
 }
 ?>
 <table>
@@ -43,7 +43,7 @@ if($_SESSION['teacher']){
         <tr>
             <td>Name</td>
 	    <?php
-	    if($_SESSION['teacher']){
+	    if ($_SESSION['teacher']) {
 		echo '<td>Attending</td>
                     <td>Homework</td>';
 	    }
@@ -55,6 +55,7 @@ if($_SESSION['teacher']){
     //Querying all the students
     $result = safeQuery(
 	    'SELECT
+	    status,
             user__overview.id AS "id",
             CONCAT(`name`,\' \',surname) AS "name"
         FROM
@@ -68,18 +69,23 @@ if($_SESSION['teacher']){
     );
     //Outputting them in a table
     $img = '<img src="' . getRootURL('../webdev/images/mail.png') . '" title="Mailsymbol" style="height:1em"/>';
-    while($row = mysql_fetch_assoc($result)){
+    while ($row = mysql_fetch_assoc($result)) {
+	$id = $row['id'];
 	echo '<tr>';
-	echo '<td><a href="' . getRootURL('profile/profile.php') . '?id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
-	if($_SESSION['teacher']){
-	    echo
-	    '<td><input type="checkbox" checked="checked" name="attend" /></td>
-            <td><input type="checkbox" checked="checked" name="homework" /></td>';
+	echo '<td><a href="' . getRootURL('profile/profile.php') . '?id=' . $id . '">' . $row['name'] . '</a></td>';
+	if ($_SESSION['teacher']) {
+	    if ($row['status'] == 't') {
+		echo '<td></td><td></td>';
+	    } else {
+		echo
+		'<td><input type="checkbox" checked="checked" name="attend[]" value="'.$id.'" /></td>
+		    <td><input type="checkbox" checked="checked" name="homework[]" value="'.$id.'" /></td>';
+	    }
 	}
 	echo '<td>';
-	if($_SESSION['studentId'] != $row['id']){
-	    echo '<a href="../mails/write.php?receiver=' . $row['id'] . '">' . $img . '</a>';
-	}else{
+	if ($_SESSION['studentId'] != $id) {
+	    echo "<a href=\"../mails/write.php?receiver=$id\">$img</a>";
+	} else {
 	    echo 'X';
 	}
 	echo '</td></tr>';
@@ -87,11 +93,11 @@ if($_SESSION['teacher']){
     ?>
 </table>
 <?php
-if($_SESSION['teacher']){
+if ($_SESSION['teacher']) {
     echo
-    '<br />
-    <button type="submit">Submit changes</button>
-    </form>';
+	'<br />
+	<button type="submit">Submit changes</button>
+	</form>';
 }
 $HTML->outputFooter();
 ?>
