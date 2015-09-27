@@ -20,7 +20,7 @@ $HTML->outputHeader();
 	echo '<h2> Pending Request </h2>
 		<ul>';
 	foreach($pending as $key => $val){
-	    echo '<li>' . ClassPerson::STATICgetName($key);
+	    echo '<li>' . ClassPerson::staticGetName($key);
 	    if(!$val){
 		echo ' - <a href="#">Accept</a> - <a href="#">Deny</a>';
 	    }
@@ -41,7 +41,7 @@ $HTML->outputHeader();
 	echo '<h2> Friends </h2>
 			<ul>';
 	for($i = 0; $i < count($accepted); $i++){
-	    echo '<li>' . ClassPerson::STATICgetName($accepted[$i]) . '</li>';
+	    echo '<li>' . ClassPerson::staticGetName($accepted[$i]) . '</li>';
 	}
 	echo '</ul>';
     }

@@ -4,15 +4,18 @@
 	<?php
 	session_start();
 	echo '<style>';
-	if ($_SESSION['ui']['darkTheme']) {
-	    echo '*{color: white;}';
+	if ($_SESSION['ui']['darkTheme']) {?>
+	*{
+		color: white;
+	}
+	<?php
 	}
 	?>
 	.daysPassed{
-	width: 100%;
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-	text-align: center;
+		width: 100%;
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		text-align: center;
 	}
 	<?php
 	echo '</style>';
