@@ -1,3 +1,4 @@
+/*IDs*/
 #mDate{
     margin-right:0.5em;
     margin-top:-1.5em;
@@ -6,6 +7,20 @@
 
 #messageContent{
     text-align: justify;
+}
+
+/* Foramating the mail listing*/
+#mailTable *{
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#mailTable thead tr *{
+    border-bottom-width: 4px;
+}
+
+#mailTable tbody{
+    line-height: 1.75;
 }
 
 /* Classes */

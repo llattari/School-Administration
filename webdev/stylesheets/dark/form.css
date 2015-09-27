@@ -1,10 +1,16 @@
 /* Formating a form */
-input, textarea{
+input, textarea, select{
+    color:white;
     background-color: black;
+    border: 1px solid #CCCCCC;
 }
 
 input{
-    color:white;
-    border: 1px solid white;
     padding: 5px;
 }
+
+button{
+    color: black;
+}
+
+/* Formating the structure */

@@ -9,7 +9,10 @@ form table{
 }
 
 fieldset{
-    border: none;
+    border-width: .5px;
+    margin: .5em 1em;
+    padding-bottom: 1em;
+    padding-top: .5em;
 }
 
 fieldset *{
@@ -27,14 +30,14 @@ input{
 }
 
 textarea{
+    padding: 3px;
     width: 80%;
     margin-left: 1em;
 }
 
 select{
-    background-color: black;
+    color: black;
     min-width: 10em;
-    text-align: center;
 }
 
 button{

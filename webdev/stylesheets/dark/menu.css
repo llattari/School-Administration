@@ -7,7 +7,7 @@
     color:white;
 }
 
-#menu ul li.active a, #menu ul li:hover a{
+#menu ul li:hover a{
     background-color: #C4C4C4;
     color: black;
 }

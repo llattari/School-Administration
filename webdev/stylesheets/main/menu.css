@@ -21,12 +21,10 @@ nav{
     width: 14.2857%;
 }
 
-#menu ul li.active, #menu ul li:hover ul{
+#menu ul li:hover ul{
     background-color: #797863;
     display:block;
 }
-
-#menu ul li.active{ font-weight: bold; }
 
 #menu ul li a{
     display: block;
