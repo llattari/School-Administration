@@ -1,7 +1,8 @@
 <?php
 
 class MenuEntry {
-    private $link, $caption;
+
+    private $link, $caption, $width;
     private $subItems = Array();
 
     /**
@@ -11,13 +12,14 @@ class MenuEntry {
      * @param string $caption
      */
     public function __construct($link = NULL, $caption = NULL) {
-	if($link && $caption){
+	if ($link && $caption) {
 	    $this->link = $link;
 	    $this->caption = $caption;
-	}else{
+	} else {
 	    $this->link = '';
 	    $this->caption = '';
 	}
+	$this->width = 100;
     }
 
     /**
@@ -28,14 +30,24 @@ class MenuEntry {
      * 	    Returns true if it works otherwise false
      */
     public function addItem($newItem = NULL) {
-	if($newItem instanceof MenuEntry){
+	if ($newItem instanceof MenuEntry) {
 	    array_push($this->subItems, $newItem);
 	    return true;
 	}
 	return false;
     }
 
-    // Getter
+    public function setWidth($newWidth) {
+	$width = (float) $newWidth;
+	if ($width <= 0 || $width > 100) {
+	    $this->width = 100;
+	    return false;
+	}
+	$this->width = $width;
+	return true;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Getter">
     /**
      * getLink()
      * 	    Returns the link where the menu items leads
@@ -64,7 +76,8 @@ class MenuEntry {
 	return $this->subItems;
     }
 
-    // More object functions
+    // </editor-fold>
+
     /**
      * __toString()
      * 	    Returns the string version of the object
@@ -73,36 +86,14 @@ class MenuEntry {
     public function __toString() {
 	//Getting the submenus
 	$submenus = '<ul>';
-	for($i = 0; $i < count($this->subItems); $i++){
+	for ($i = 0; $i < count($this->subItems); $i++) {
 	    $submenus .= (string) $this->subItems[$i];
 	}
 	$submenus .= '</ul>';
-	//Is this active?
-	$active = $this->isActive($this->link) ? ' class="active"' : '';
 	//Return the result
-	return "<li$active>
+	return "<li style=\"width:" . $this->width . "%\">
 		<a href=\"" . getRootURL($this->link) . '">' . $this->caption . '</a>' .
 		$submenus . '</li>';
-    }
-
-    // Private functions
-    /**
-     * isActive()
-     * 	    Returns wheather the website is active or not
-     * @return boolean
-     */
-    private function isActive() {
-	//Is the current URI = Menu URI
-	if(isin($this->link, $_SERVER['REQUEST_URI'])){
-	    return true;
-	}
-	//for every subItem
-	for($i = 0; $i < count($this->subItems); $i++){
-	    if(isIn($this->subItems[$i]->getLink(), $_SERVER['REQUEST_URI'])){
-		return true;
-	    }
-	}
-	return false;
     }
 
 }
