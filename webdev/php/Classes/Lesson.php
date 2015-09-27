@@ -50,7 +50,7 @@ class Lesson {
 	$classId = $this->class[0];
 	$existsSELECT = safeQuery("SELECT id FROM lesson__overview WHERE classId = $classId AND started = \"$started\";");
 	if(mysql_num_rows($existsSELECT) == 0){
-	    safeQuery("INSERT INTO lesson(classId, started)
+	    safeQuery("INSERT INTO lesson__overview(classId, started)
                                 VALUES($classId, \"$started\");");
 	    $this->id = mysql_insert_id();
 	    Logger::log('Created a new lesson with the id: ' . $this->id, Logger::LESSONMANAGEMENT);
