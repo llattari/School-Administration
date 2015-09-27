@@ -2,7 +2,7 @@
 require_once '../webdev/php/Generators/HTMLGenerator/Generator.php';
 require_once '../webdev/php/Classes/ClassClass.php';
 
-$HTML = new HTMLGenertator\HTMLfile('Information');
+$HTML = new HTMLGenertator\HTMLfile('Information', ['information.css'], NULL, NULL);
 $HTML->outputHeader();
 ?>
 <h1>Current News</h1>
@@ -23,13 +23,13 @@ $HTML->outputHeader();
 	);
     }
     while($row = mysql_fetch_assoc($result)){
-	echo '<li>';
+	echo '<div class="information">';
 	if(!is_null($row['classID'])){
 	    $class = new StudentClass($row['classID']);
 	    echo '[' . (string) $class . '] ';
 	}
 	echo $row['notification'];
-	echo '</li>';
+	echo '</div>';
     }
     ?>
 </ul>
