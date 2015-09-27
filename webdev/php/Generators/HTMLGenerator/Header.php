@@ -3,6 +3,7 @@
 namespace HTMLGenertator;
 
 class Header {
+
     const NORMALMODE = 0;
     const DARKMODE = 1;
     const MOBILEMODE = 2;
@@ -11,6 +12,7 @@ class Header {
     private $title;
     private $cssFiles = Array('main.css', 'menu.css');
     private $jsFiles = Array();
+    private $otherInformation = Array();
     private $mode = Header::NORMALMODE;
     private $metaInformation = Array('charset' => Header::DEFAULTCHARSET);
 
@@ -29,9 +31,9 @@ class Header {
     // <editor-fold defaultstate="collapsed" desc="Setter">
 
     public function addCSS($cssFile) {
-	if($cssFile != NULL){
-	    if(is_array($cssFile)){
-		for($i = 0; $i < count($cssFile); $i++){
+	if ($cssFile != NULL) {
+	    if (is_array($cssFile)) {
+		for ($i = 0; $i < count($cssFile); $i++) {
 		    array_push($this->cssFiles, $cssFile[$i]);
 		}
 		return true;
@@ -43,14 +45,28 @@ class Header {
     }
 
     public function addJS($jsFile) {
-	if($jsFile != NULL){
-	    if(is_array($jsFile)){
-		for($i = 0; $i < count($jsFile); $i++){
+	if ($jsFile != NULL) {
+	    if (is_array($jsFile)) {
+		for ($i = 0; $i < count($jsFile); $i++) {
 		    array_push($this->jsFiles, $jsFile[$i]);
 		}
 		return true;
 	    }
 	    array_push($this->jsFiles, $jsFile);
+	    return true;
+	}
+	return false;
+    }
+
+    public function addOther($otherStuff) {
+	if ($otherStuff != NULL) {
+	    if (is_array($otherStuff)) {
+		for ($i = 0; $i < count($otherStuff); $i++) {
+		    array_push($this->otherInformation, $otherStuff[$i]);
+		}
+		return true;
+	    }
+	    array_push($this->otherInformation, $otherStuff);
 	    return true;
 	}
 	return false;
@@ -62,8 +78,8 @@ class Header {
     }
 
     public function setMetaInformation($newInformation) {
-	if(is_array($newInformation)){
-	    foreach($newInformation as $info => $value){
+	if (is_array($newInformation)) {
+	    foreach ($newInformation as $info => $value) {
 		$this->metaInformation[$info] = $value;
 	    }
 	    return true;
@@ -94,14 +110,14 @@ class Header {
 	<title>' . $this->title . '</title>
 	<!-- Meta information -->';
 	//Outputting meta information about the site.
-	foreach($this->metaInformation as $information => $value){
+	foreach ($this->metaInformation as $information => $value) {
 	    $result.="<meta $information=\"$value\" />";
 	}
 	$result .= '<!-- Stylesheets and Javascript -->';
 	//Outputting the css files
-	foreach($this->cssFiles as $file){
+	foreach ($this->cssFiles as $file) {
 	    $result .= '<link rel="stylesheet" href="' . $this->getDir() . 'stylesheets/main/' . $file . '" />' . "\n";
-	    switch($this->mode){
+	    switch ($this->mode) {
 		case Header::DARKMODE:
 		    $result .= '<link rel="stylesheet" href="' . $this->getDir() . 'stylesheets/dark/' . $file . '" />' . "\n";
 		    break;
@@ -111,7 +127,7 @@ class Header {
 	    }
 	}
 	//Outputting the javascript files
-	foreach($this->jsFiles as $file){
+	foreach ($this->jsFiles as $file) {
 	    $result.='<script type="text/javascript" src="' . $this->getDir() . 'js/' . $file . '"></script>' . "\n";
 	}
 	$result .= '</head>';

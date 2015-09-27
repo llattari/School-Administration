@@ -6,15 +6,10 @@ namespace HTMLGenertator;
 require_once __DIR__ . '/Header.php';
 require_once __DIR__ . '/../listGenerator.php';
 require_once __DIR__ . '/../../essentials/essentials.php';
+require_once __DIR__ . '/../../essentials/databaseEssentials.php';
 require_once __DIR__ . '/../../Classes/debuging/Logger.php';
 require_once __DIR__ . '/../../Classes/Messages.php';
-
-//Starting the session
-session_start();
-// Default check whether the user is logged in or not
-if(!isset($_SESSION['studentId'])){
-    Header('Location: ../index.php');
-}
+require_once __DIR__ . '/../../checkLoggedIn.php';
 
 class HTMLfile {
     private $header = null;
@@ -26,6 +21,7 @@ class HTMLfile {
 	$this->header = new Header($pageName);
 	$this->header->addCSS($curCSS);
 	$this->header->addJS($curJS);
+	$this->header->addOther($other);
 	$this->subdir = $subdir;
     }
 

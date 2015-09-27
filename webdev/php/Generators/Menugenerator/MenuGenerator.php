@@ -17,13 +17,14 @@ $additionalDepth = substr_count($subst, '/');
  */
 function getRootURL($url) {
     global $additionalDepth;
-    for($i = 0; $i < $additionalDepth; $i++){
+    for ($i = 0; $i < $additionalDepth; $i++) {
 	$url = '../' . $url;
     }
     return $url;
 }
 
 class MenuGenerator {
+
     private $menuItems = Array();
 
     /**
@@ -34,7 +35,7 @@ class MenuGenerator {
      * 	    Returns if the action was successfull
      */
     public function addItem($newItem = NULL) {
-	if($newItem == NULL || !($newItem instanceof MenuEntry)){
+	if ($newItem == NULL || !($newItem instanceof MenuEntry)) {
 	    return false;
 	}
 	array_push($this->menuItems, $newItem);
@@ -50,8 +51,8 @@ class MenuGenerator {
      * 	    Returns true on success otherwise false
      */
     public function setItem($newItem) {
-	for($i = 0; $i < count($newItem); $i++){
-	    if(!($newItem[$i]instanceof MenuEntry)){
+	for ($i = 0; $i < count($newItem); $i++) {
+	    if (!($newItem[$i]instanceof MenuEntry)) {
 		return false;
 	    }
 	}
@@ -67,12 +68,12 @@ class MenuGenerator {
      * 	    Returns if the action was successfull
      */
     public function removeItem($newItem = NULL) {
-	if($newItem == NULL || !($newItem instanceof MenuEntry)){
+	if ($newItem == NULL || !($newItem instanceof MenuEntry)) {
 	    return false;
 	}
 	$found = false;
-	for($i = 0; $i < count($this->menuItems); $i++){
-	    if($this->menuItems[$i] == $newItem){
+	for ($i = 0; $i < count($this->menuItems); $i++) {
+	    if ($this->menuItems[$i] == $newItem) {
 		unset($this->menuItems[$i]);
 		$found = true;
 	    }
@@ -95,7 +96,9 @@ class MenuGenerator {
     public function __toString() {
 	$finalString = '<nav id="menu"><ul>';
 	$menuItems = count($this->menuItems);
-	for($i = 0; $i < $menuItems; $i++){
+	$itemWidth = roundDown(100.0 / $menuItems, 4);
+	for ($i = 0; $i < $menuItems; $i++) {
+	    $this->menuItems[$i]->setWidth($itemWidth);
 	    $finalString .= (string) $this->menuItems[$i];
 	}
 	$finalString .= '</ul></nav>';
