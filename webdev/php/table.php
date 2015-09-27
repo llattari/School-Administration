@@ -1,6 +1,7 @@
 <?php
 
-$queryTable = 'SELECT
+function getTimetable() {
+    $queryTable = 'SELECT
 	    course__overview.subject AS "subject",
 	    day, lesson, room
         FROM course__student
@@ -12,25 +13,22 @@ $queryTable = 'SELECT
         WHERE
 	    course__student.studentID = ' . $_SESSION['studentId'] . '
         ORDER BY lesson, day;';
-
-function getTimetable() {
-    global $queryTable;
     $times = getTimes();
     $result = safeQuery($queryTable);
-    if(!$result){
+    if (!$result) {
 	return '';
     }
     $final = '<tr><td>' . $times[0] . '</td>';
     $day = $hour = 1;
-    while($row = mysql_fetch_assoc($result)){
-	if($hour != $row['lesson']){
-	    while($hour != $row['lesson'] + 1){
+    while ($row = mysql_fetch_assoc($result)) {
+	if ($hour != $row['lesson']) {
+	    while ($hour != $row['lesson'] + 1) {
 		$final.= '</tr><tr><td>' . $times[$row['lesson'] - 1];
 		$hour++;
 	    }
 	    $day = 1;
 	}
-	while($day < $row['day']){
+	while ($day < $row['day']) {
 	    $final.= '<td class="free">Freetime</td>';
 	    $day++;
 	}
@@ -59,8 +57,8 @@ function dataToString($arrayData) {
 function getTimes() {
     $times = Array();
     $result = safeQuery('SELECT start, end FROM timetable__standardTimes;');
-    if($result){
-	for($i = 0; $row = mysql_fetch_row($result); $i++){
+    if ($result) {
+	for ($i = 0; $row = mysql_fetch_row($result); $i++) {
 	    $beginning = date('H:i', strtotime($row[0]));
 	    $end = date('H:i', strtotime($row[1]));
 	    array_push($times, $beginning . '<br />' . $end);

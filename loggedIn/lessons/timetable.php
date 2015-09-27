@@ -1,9 +1,7 @@
 <?php
-require_once '../webdev/php/Generators/HTMLGenerator/Generator.php';
-require_once '../webdev/php/Generators/tableGenerator.php';
-require_once '../webdev/php/table.php';
-
-use HTMLGenertator;
+require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
+require_once '../../webdev/php/Generators/tableGenerator.php';
+require_once '../../webdev/php/table.php';
 
 $HTML = new HTMLGenertator\HTMLfile('Timetable', ['table.css'], ['dynDays.js']);
 $HTML->outputHeader();
