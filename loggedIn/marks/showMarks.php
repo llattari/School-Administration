@@ -4,8 +4,6 @@ require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
 require_once '../../webdev/php/Classes/Mark.php';
 require_once '../../webdev/php/Classes/ClassClass.php';
 
-use MarkAdministration;
-
 $HTML = new HTMLGenertator\HTMLfile('View Marks', ['marks.css'], NULL, NULL, 1);
 $marks = new MarkAdministration\Grade($_SESSION['studentId']);
 $HTML->outputHeader();
