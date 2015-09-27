@@ -1,13 +1,9 @@
 <?php
 
 require_once 'Mark.php';
-$statusArray = Array(
-    's' => 'Student',
-    't' => 'Teacher',
-    'h' => 'Headmaster'
-);
 
 class ClassPerson {
+
     private $name = Array();
     private $contacts = Array();
     private $bDate = 0;
@@ -15,9 +11,9 @@ class ClassPerson {
     private $grade = NULL;
 
     function __construct($id) {
-	if(intval($id)){
+	if (intval($id)) {
 	    $result = safeQuery("SELECT * FROM user__overview WHERE id = $id;");
-	    if(mysql_num_rows($result) == 1){
+	    if (mysql_num_rows($result) == 1) {
 		$row = mysql_fetch_assoc($result);
 		$this->name = array($row['name'], $row['surname'], $row['username']);
 		$this->contacts = array(
@@ -29,14 +25,16 @@ class ClassPerson {
 		);
 		$this->bDate = strtotime($row['birthday']);
 		$this->status = $row['status'];
-		if($this->status != 't'){
+		if ($this->status != 't') {
 		    $this->grade = (int) $row['grade'];
 		}
-	    }else{
+	    } else {
 		$this->name = NULL;
 	    }
 	}
     }
+
+    // <editor-fold defaultstate="collapsed" desc="Getter">
 
     /**
      * Returns the possible namestates
@@ -84,15 +82,21 @@ class ClassPerson {
 	return !is_null($this->name);
     }
 
+    // </editor-fold>
+
     /**
+     * staticGetName($id)
+     * @static
      * Returns the name of a person without initing an object
      * @param int $id
+     *	    The id of the person of whom you want the name
      * @return string
+     *	    The Name as a string
      */
-    public static function STATICgetName($id) {
-	if(intval($id) != 0){
+    public static function staticGetName($id) {
+	if (intval($id) != 0) {
 	    $result = safeQuery("SELECT CONCAT(`name`, '  ', surname) FROM user__overview WHERE id = $id;");
-	    if(mysql_num_rows($result) == 1){
+	    if (mysql_num_rows($result) == 1) {
 		$row = mysql_fetch_row($result);
 		return $row[0];
 	    }

@@ -38,7 +38,7 @@ $HTML->outputHeader();
         <p>A teacher has entered a new mark in Arts.</p>
     </div>
 </a>
-<a href="timetable.php">
+<a href="lessons/timetable.php">
     <div id="friends" class="card" oncontextmenu="return toggleVisibility(this);">
         <h1>Timetable</h1>
         <p>See your timetable.</p>
