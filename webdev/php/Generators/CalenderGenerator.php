@@ -6,6 +6,7 @@ require_once __DIR__ . '/../Classes/EventClass.php';
 $oneDayInSec = 3600 * 24;
 
 class Calendar {
+
     private $month, $year;
     private $marked = Array();
     private $firstOfMonth;
@@ -17,20 +18,20 @@ class Calendar {
      */
     public function __construct($month = NULL, $year = NULL) {
 	//Evaluating the year
-	if($year == NULL || $year <= 1969){
+	if ($year == NULL || $year <= 1969) {
 	    $this->year = (int) date('Y');
-	}else{
+	} else {
 	    $this->year = $year;
 	}
 	//Evaluating the month
-	if($month == NULL || $month < 1 || $month > 13){
+	if ($month == NULL || $month < 1 || $month > 13) {
 	    $this->month = (int) date('m');
-	}else{
+	} else {
 	    $this->month = $month;
 	}
 	$this->firstOfMonth = strtotime('1.' . $this->month . '.' . $this->year);
 	//For all days in the month mark them as false (t = days the month has)
-	for($i = 1; $i <= date('t', $this->firstOfMonth); $i++){
+	for ($i = 1; $i <= date('t', $this->firstOfMonth); $i++) {
 	    $this->marked[$i] = false;
 	}
     }
@@ -71,7 +72,7 @@ class Calendar {
      * 		Wheather the day is marked or not.
      */
     public function isMarked($day) {
-	if($day > 0 && $day < count($this->marked) + 1){
+	if ($day > 0 && $day < count($this->marked) + 1) {
 	    return $this->marked[$day] !== false;
 	}
 	return false;
@@ -84,7 +85,7 @@ class Calendar {
      * @return boolean
      */
     public function markDate($date, $marked = true) {
-	if($date > 0 && $date < 32){
+	if ($date > 0 && $date < 32) {
 	    $this->marked[$date] = (bool) $marked;
 	}
 	return $this->marked[$date] !== false;
@@ -100,7 +101,7 @@ class Calendar {
 	$TheDay = $day . '.' . $this->month . '.' . $this->year;
 	//w = Id of the weekday
 	$weekDayBeginingSun = date('w', strtotime($TheDay));
-	if($weekDayBeginingSun == 0){
+	if ($weekDayBeginingSun == 0) {
 	    return 6;
 	}
 	return $weekDayBeginingSun - 1;
@@ -121,11 +122,11 @@ class Calendar {
 	$startday = $this->firstOfMonth - $offset;
 	//Peparing for loop!
 	$moreRows = true;
-	for($rowNum = 0; $moreRows; $rowNum++){
-	    $this->outputRow($startday, $rowNum, $moreRows);
+	for ($rowNum = 0; $moreRows; $rowNum++) {
+	    $output.= $this->outputRow($startday, $rowNum, $moreRows);
 	}
 	$output .='</table>';
-	echo $output;
+	return $output;
     }
 
     /**
@@ -140,26 +141,26 @@ class Calendar {
      */
     private function outputRow($startday, $rowNum, &$moreRows) {
 	global $oneDayInSec;
-	$string = '<tr>';
-	for($i = 0; $i < 7; $i++){
+	$finalString = '<tr>';
+	for ($i = 0; $i < 7; $i++) {
 	    $curDate = $startday + $i * $oneDayInSec + $rowNum * 7 * $oneDayInSec;
 	    $link = Array('', '');
 	    $style = '';
 	    //If date not from current month: mark as outdated
-	    if(date('n', $curDate) != $this->month){
+	    if (date('n', $curDate) != $this->month) {
 		$style = 'class="outDated"';
-	    }else if($this->isMarked(date('j', $curDate))){
+	    } else if ($this->isMarked(date('j', $curDate))) {
 		$style = 'class="marked" style="background-color:' . $this->marked[date('j', $curDate)] . '"';
 		$link = Array('<a href="?date=' . date('d.m.Y', $curDate) . '">', '</a>');
 	    }
-	    $string.= "<td $style>" . $link[0] . date('d', $curDate) . $link[1] . '</td>';
+	    $finalString.= "<td $style>" . $link[0] . date('d', $curDate) . $link[1] . '</td>';
 	    //Checks wheather the current day is the last one in this month
-	    if(date('tn', $curDate) == date('j', $curDate) . $this->month){
+	    if (date('tm', $curDate) == date('d', $curDate) . $this->month) {
 		$moreRows = false;
 	    }
 	}
-	$string .= '</tr>';
-	return $string;
+	$finalString .= '</tr>';
+	return $finalString;
     }
 
 }
