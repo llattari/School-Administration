@@ -2,6 +2,8 @@
 require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
 require_once '../../webdev/php/Generators/tableGenerator.php';
 require_once '../../webdev/php/Classes/ClassMail.php';
+
+# Initing the HTML object
 $HTML = new HTMLGenertator\HTMLfile('Mail inbox', ['table.css', 'mails.css'], NULL, NULL, 1);
 $HTML->outputHeader();
 
@@ -17,6 +19,7 @@ $mailOverview = new MailManager\Overview($studentId);
 </p>
 
 <?php
+# Outputing all mails in a table
 if($mailOverview->getTotal() == 0){
     echo '<p>You have no mails in your virtual letter box.</p>';
 }else{
