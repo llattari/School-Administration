@@ -1,17 +1,18 @@
 <?php
 
 class Logger extends LoggerConstants {
+
     private $allEvents = Array();
 
     public function __construct($id = NULL) {
 	$sql = 'SELECT * FROM debug__logger';
-	if($id = NULL){
+	if ($id = NULL) {
 	    $sql.=';';
-	}else{
+	} else {
 	    $sql.=' WHERE issuer=' . (int) $id . ';';
 	}
 	$result = safeQuery($sql);
-	while($row = mysql_fetch_assoc($result)){
+	while ($row = mysql_fetch_assoc($result)) {
 	    array_push($this->allEvents, new Event($row['event'], $row['issuer'], $row['ts']));
 	}
     }
@@ -31,9 +32,9 @@ class Logger extends LoggerConstants {
 	$startTime = ($start == NULL) ? time() - 3600 * 24 : $start;
 	//If end is null set it to be today
 	$endTime = ($end == NULL) ? time() : $end;
-	for($i = 0; $i < count($this->allEvents); $i++){
+	for ($i = 0; $i < count($this->allEvents); $i++) {
 	    $eventTime = $this->allEvents[$i]->getTimeStamp();
-	    if($startTime <= $eventTime && $eventTime <= $endTime){
+	    if ($startTime <= $eventTime && $eventTime <= $endTime) {
 		array_push($filteredEvents, $this->allEvents[$i]);
 	    }
 	}
@@ -47,9 +48,9 @@ class Logger extends LoggerConstants {
      * @return Event
      */
     public function getEvent($eventNumber) {
-	if(-1 < $eventNumber && $eventNumber < count($this->allEvents)){
+	if (-1 < $eventNumber && $eventNumber < count($this->allEvents)) {
 	    return $this->allEvents[$eventNumber];
-	}else{
+	} else {
 	    return NULL;
 	}
     }
@@ -73,13 +74,15 @@ class Logger extends LoggerConstants {
 }
 
 class LoggerConstants {
+
     const OTHER = 0;
     const USERMANAGEMENT = 1;
     const TASKMANAGEMENT = 2;
     const CLASSMANAGEMENT = 3;
     const MARKMENAGEMENT = 4;
     const LESSONMANAGEMENT = 5;
-    const CHATABUSE = 6;
-    const SOCIAL = 7;
+    const LOGIN = 6;
+    const CHATABUSE = 7;
+    const SOCIAL = 8;
 
 }

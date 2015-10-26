@@ -27,8 +27,8 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 
 	//Mails
 	$items[4] = new MenuEntry('mails/read.php', 'Mails');
-	$items[4]->addItem(new MenuEntry('mails/trash.php', 'Trash'));
 	$items[4]->addItem(new MenuEntry('mails/write.php', 'Write message'));
+	$items[4]->addItem(new MenuEntry('mails/trash.php', 'Trash'));
 
 	//Tools
 	$items[5] = new MenuEntry('tasks/list.php', 'Tools');
