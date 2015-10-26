@@ -17,7 +17,7 @@ if ($datestamp === false || $datestamp == -1) {
 }
 
 //peparing datestamp
-$stamp = 'm='.date('m', $datestamp).'&y='.date('Y', $datestamp);
+$stamp = 'm=' . date('m', $datestamp) . '&y=' . date('Y', $datestamp);
 ?>
 
 <h1>Eventlist for the <?php echo date('d.m.Y', $datestamp); ?></h1>
@@ -48,3 +48,6 @@ if (mysql_num_rows($result) != 0) {
 } else {
     echo 'Today there is nothing happening.';
 }
+
+$HTML->outputFooter();
+?>
