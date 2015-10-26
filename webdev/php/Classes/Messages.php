@@ -1,11 +1,10 @@
 <style type="text/css">
     #mError, #mSuc{
         position: absolute;
-        left: 0em;
-        right: 0em;
         width: 40%;
-        padding: 1.3em;
-        margin: 2em auto;
+        padding: 1%;
+        top: 2em;
+	left: 26%;
         z-index: 5;
     }
 
