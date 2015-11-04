@@ -18,7 +18,6 @@ for($i = 0; $i < count($allSubjects); $i++){
     $subjectId = $allSubjects[$i];
     $subject = $marks->getSubjectById($subjectId);
     ?>
-
     <h3>
         Subject: <?php echo StudentClass::getClassName($subjectId); ?>
     </h3>
