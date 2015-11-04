@@ -11,7 +11,7 @@ class Header {
 
     private $title;
     private $cssFiles = Array('main.css', 'menu.css');
-    private $jsFiles = Array();
+    private $jsFiles = Array('messageMovement.js');
     private $otherInformation = Array();
     private $mode = Header::NORMALMODE;
     private $metaInformation = Array('charset' => Header::DEFAULTCHARSET);
