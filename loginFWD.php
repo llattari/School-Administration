@@ -18,6 +18,7 @@ $psw = escapeStr($_POST['psw']);
 function createSESSION($query) {
     session_start();
     $result = safeQuery($query);
+    echo mysql_error();
     if (mysql_num_rows($result) != 1) {
 	return false;
     }
@@ -72,12 +73,12 @@ if (mysql_num_rows($passwordResult) == 0) {
 		user__overview.id AS 'id',
 		grade, status, markNames, darkTheme
 	    FROM user__overview
-	    JOIN user__interface ON user__interface.userID = user__overview.id
+	    JOIN user__interface ON user__interface.id = user__overview.id
 	    WHERE user__overview.id = $userId;");
     if ($suc) {
 	Message::castMessage('Successfully logged in', true, 'loggedIn/index.php');
 	Logger::log('User logged in.', Logger::USERMANAGEMENT);
     } else {
-	Message::castMessage('SESSION creation failed please contact the administrator.', false, 'help.php');
+	Message::castMessage('Session creation failed please contact the administrator.', false, 'index.php');
     }
 }

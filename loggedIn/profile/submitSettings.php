@@ -23,8 +23,8 @@ if(isset($_POST['newPswOne']) && isset($_POST['newPswTwo'])){
 //Changing the UI Settings
 $_SESSION['ui']['markNames'] = $markNames = (int) (bool) $_POST['names'];
 $_SESSION['ui']['darkTheme'] = $darkTheme = (int) (bool) $_POST['dark'];
-$sucUI = safeQuery("UPDATE user__interface SET darkTheme = $darkTheme, markNames = $markNames WHERE userID = " . $_SESSION['studentId'] . ';');
-echo "UPDATE user__interface SET darkTheme = $darkTheme, markNames = $markNames WHERE userID = " . $_SESSION['studentId'] . ';';
+$sucUI = safeQuery("UPDATE user__interface SET darkTheme = $darkTheme, markNames = $markNames WHERE id = " . $_SESSION['studentId'] . ';');
+echo "UPDATE user__interface SET darkTheme = $darkTheme, markNames = $markNames WHERE id = " . $_SESSION['studentId'] . ';';
 
 if($suc && $sucUI){
     Message::castMessage('Settings successfully saved.', true, 'settings.php');

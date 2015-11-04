@@ -19,9 +19,9 @@ $HTML->outputHeader();
     }else{
 	echo '<h2> Pending Request </h2>
 		<ul>';
-	foreach($pending as $key => $val){
+	foreach($pending as $key => $value){
 	    echo '<li>' . ClassPerson::staticGetName($key);
-	    if(!$val){
+	    if(!$value){
 		echo ' - <a href="#">Accept</a> - <a href="#">Deny</a>';
 	    }
 	    echo '</li>';

@@ -5,6 +5,7 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 <div id="menu">
     <ul>
 	<?php
+	$perms = getPermission();
 	//Setting the Menu
 	$menu = new MenuGenerator();
 	$items = Array();
@@ -12,10 +13,13 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 	//General overview
 	$items[0] = new MenuEntry('index.php', 'Overview');
 	$items[0]->addItem(new MenuEntry('lessons/timetable.php', 'Timetable'));
+	if (in_array('admin', $perms)) {
+	    $items[0]->addItem(new MenuEntry('admin/index.php', 'Admin pannel'));
+	}
 
 	//Lessons
 	$items[1] = new MenuEntry('lessons/index.php', 'Lesson');
-	if ($_SESSION['teacher']) {
+	if (isset($_SESSION['teacher'])) {
 	    $items[1]->addItem(new MenuEntry('lessons/homework.php', 'Homework'));
 	}
 

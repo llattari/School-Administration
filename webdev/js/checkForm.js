@@ -70,3 +70,9 @@ function checkEvent() {
     }
     return valid;
 }
+
+//OnChange method to see unsaved values
+function changed(element) {
+    element.style.backgroundColor = 'blue';
+    element.title = 'Unsaved changes';
+}
