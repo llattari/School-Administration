@@ -12,8 +12,10 @@ require_once __DIR__ . '/../../Classes/Messages.php';
 require_once __DIR__ . '/../../checkLoggedIn.php';
 
 class HTMLfile {
+
     private $header = null;
     private $subdir = 0;
+    private $menuFile = '';
 
     //Object constructor
     function __construct($pageName, $curCSS = NULL, $curJS = NULL, $other = NULL, $subdir = 0) {
@@ -23,6 +25,11 @@ class HTMLfile {
 	$this->header->addJS($curJS);
 	$this->header->addOther($other);
 	$this->subdir = $subdir;
+	$this->menuFile = __DIR__ . '/../../menu.php';
+    }
+
+    function changeMenuFile($newMenuFile) {
+	$this->menuFile = $newMenuFile;
     }
 
     /**
@@ -30,7 +37,7 @@ class HTMLfile {
      * 	    Outputs the header of the HTML file
      */
     function outputHeader() {
-	if($_SESSION['ui']['darkTheme']){
+	if ($_SESSION['ui']['darkTheme']) {
 	    $this->header->toogleMode(Header::DARKMODE);
 	}
 	?>
@@ -41,7 +48,7 @@ class HTMLfile {
 		<?php \Message::show(); ?>
 		<!-- Implementing the menu -->
 		<?php
-		require_once __DIR__ . '/../../menu.php';
+		require_once $this->menuFile;
 		//Starting the content
 		echo '<!--The content -->
                     <div id = "content" >';

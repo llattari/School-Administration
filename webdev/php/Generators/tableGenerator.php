@@ -3,8 +3,9 @@
 function generateSpecialRow($inTR, $arrayOfTDs) {
     $finalString = "<tr $inTR>";
     //for every element in the array gererate a td-Tag
-    for($i = 0; $i < count($arrayOfTDs); $i++){
-	$finalString.='<td>' . $arrayOfTDs[$i] . '</td>';
+    for ($i = 0; $i < count($arrayOfTDs); $i++) {
+	$string = is_null($arrayOfTDs[$i]) ? '--' : $arrayOfTDs[$i];
+	$finalString.="<td>$string</td>";
     }
     $finalString.='</tr>';
     //Return the final row

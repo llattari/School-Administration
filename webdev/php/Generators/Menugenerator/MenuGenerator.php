@@ -1,6 +1,7 @@
 <?php
 
 require_once 'MenuItem.php';
+require_once __DIR__ . '/../../perms.php';
 
 //Calculates the additionalDepth
 global $additionalDepth;
