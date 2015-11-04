@@ -1,25 +1,3 @@
-<style type="text/css">
-    #mError, #mSuc{
-        position: absolute;
-        width: 40%;
-        padding: 1%;
-        top: 2em;
-	left: 26%;
-        z-index: 5;
-    }
-
-    #mError{
-        background-color: red;
-        border: 2px solid #990000;
-    }
-
-    #mSuc{
-        background-color: #159330;
-        border: 2px solid green;
-    }
-
-</style>
-
 <script type="text/javascript">
     function show(element) {
 	element.style.visiblity = "visible";

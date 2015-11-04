@@ -57,3 +57,23 @@ a{ color:black;}
 
 /* Centering a block object */
 .centerMargin{ margin:auto; }
+
+/* Style of the pop-in messages */
+#mError, #mSuc{
+    position: absolute;
+    width: 40%;
+    padding: 1%;
+    top: 2em;
+    left: 26%;
+    z-index: 5;
+}
+
+#mError{
+    background-color: red;
+    border: 2px solid #990000;
+}
+
+#mSuc{
+    background-color: #159330;
+    border: 2px solid green;
+}

@@ -8,8 +8,11 @@ nav{
     text-align: center;
 }
 
+#menu{
+    display: block;
+}
+
 #menu ul{
-    font-size: 100%;
     list-style: none;
 }
 
@@ -17,8 +20,6 @@ nav{
     background-color: #C1C09F;
     display: inline;
     float: left;
-    font-size: 100%;
-    width: 14.2857%;
 }
 
 #menu ul li:hover ul{
