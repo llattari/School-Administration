@@ -8,7 +8,7 @@ require_once 'databaseEssentials.php';
  * 	Whether the search is a substring of string
  */
 function isIn($search, $string) {
-    return is_int(strpos($search, $string));
+    return is_int(strpos($string, $search));
 }
 
 /**

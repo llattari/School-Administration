@@ -4,7 +4,7 @@ class Message {
 
     //Showing the message
     public static function show() {
-	if(Message::hasMessage()){
+	if (Message::hasMessage()) {
 	    echo '<div id="m' . $_GET['mType'] . '" onload="show(this)">' .
 	    $_GET['message']
 	    . '</div>';
@@ -22,18 +22,23 @@ class Message {
      * @param String $destination Where will the message lead you [optional]
      */
     public static function castMessage($message = '', $suc = false, $destination = '#') {
-	$finalString = '?';
-	if($destination != '#'){
-	    $finalString = $destination . $finalString;
+	if (isIn('?', $destination)) {
+	    $concat = '&';
+	} else {
+	    $concat = '?';
+	}
+	if ($destination != '#') {
+	    $finalString = $destination . $concat;
 	}
 	$finalString .="message=$message&mType=";
-	if($suc){
+	if ($suc) {
 	    $finalString .="Suc";
-	}else{
+	} else {
 	    $finalString .="Error";
 	}
 	Header("Location: $finalString");
     }
 
 }
+
 ?>
