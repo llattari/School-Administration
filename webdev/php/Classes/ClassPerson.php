@@ -1,7 +1,5 @@
 <?php
 
-require_once 'Mark.php';
-
 class ClassPerson {
 
     private $name = Array();
@@ -26,7 +24,7 @@ class ClassPerson {
 		$this->bDate = strtotime($row['birthday']);
 		$this->status = $row['status'];
 		if ($this->status != 't') {
-		    $this->grade = (int) $row['grade'];
+		    $this->grade = intval($row['grade']);
 		}
 	    } else {
 		$this->name = NULL;
