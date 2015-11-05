@@ -19,15 +19,18 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 
 	//Lessons
 	$items[1] = new MenuEntry('lessons/index.php', 'Lesson');
-	if (isset($_SESSION['teacher'])) {
+	if (in_array('teacher', $perms)) {
 	    $items[1]->addItem(new MenuEntry('lessons/homework.php', 'Homework'));
 	}
 
 	//Classes
 	$items[2] = new MenuEntry('classOverview.php', 'Classes');
-	//List of all the classes
+
 	//Marks
 	$items[3] = new MenuEntry('marks/showMarks.php', 'Marks');
+	if (in_array('teacher', $perms)) {
+	    $items[3]->addItem(new MenuEntry('marks/setMarks.php', 'Add marks'));
+	}
 
 	//Mails
 	$items[4] = new MenuEntry('mails/read.php', 'Mails');
