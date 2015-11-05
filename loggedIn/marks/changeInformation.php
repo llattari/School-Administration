@@ -11,8 +11,9 @@ if (isset($_POST['topic'])) {
     $dateWritten = date('Y-m-d', strtotime($_POST['dateWritten']));
     $taskCount = intval($_POST['taskCount']);
     $maxScore = intval($_POST['maxScore']);
-    $updateTestInformation = safeQuery("UPDATE course__tests SET topic='$topic', dateWritten=\"$dateWritten\" WHERE id=$id;");
-    $insertScoreInformation = safeQuery("INSERT INTO marks__test VALUES ($id, $maxScore, $taskCount) ON DUPLICATE KEY UPDATE maxScore=$maxScore, taskCount=$taskCount;");
+    $updateTestInformation = safeQuery("UPDATE course__tests SET topic = '$topic', dateWritten = \"$dateWritten\" WHERE id = $id;");
+    $insertScoreInformation = safeQuery("INSERT INTO marks__test VALUES ($id, $maxScore, $taskCount) ON DUPLICATE KEY UPDATE maxScore = $maxScore, taskCount = $taskCount;");
+    $deleteTasks = safeQuery("DELETE FROM marks__points WHERE task > $taskCount AND testId = $id;");
     if ($updateTestInformation && $insertScoreInformation) {
 	Message::castMessage('Sucessfully updated information.', true, 'enterScore.php?id=' . $id);
     } else {

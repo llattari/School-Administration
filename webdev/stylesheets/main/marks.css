@@ -7,11 +7,21 @@
     font-weight: bold;
 }
 
-.markInvisible{
-    display:none;
+.red, .yellow, .green{
+    padding: 0em 1em;
+    color:black;
 }
 
-.markVisible{
+.red{
+    background-color: red;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.green{
+    background-color: green;
 }
 
 /* Tags */
