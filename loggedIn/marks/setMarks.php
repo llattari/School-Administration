@@ -29,7 +29,7 @@ if ($classId != 0) {
     $tests = safeQuery('SELECT id, topic FROM course__tests WHERE classId = ' . $classId . ' ORDER BY dateWritten;');
     $boldIfNotComplete = (mysql_num_rows($tests) < 4) ? 'class="bold"' : '';
     while ($testRow = mysql_fetch_array($tests)) {
-	echo '<li><a href="marks/enterScore.php?id=' . $testRow[0] . '">' . $testRow[1] . '</a></li>';
+	echo '<li><a href="enterScore.php?id=' . $testRow[0] . '">' . $testRow[1] . '</a></li>';
     }
     echo '<li><a href="insertTest.php?classId=' . $classId . '" ' . $boldIfNotComplete . '>Create a new test</a></li>';
     echo '</ul>';

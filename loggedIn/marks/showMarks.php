@@ -1,7 +1,6 @@
 <?php
 //Includes
 require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
-require_once '../../webdev/php/Classes/Mark.php';
 require_once '../../webdev/php/Classes/ClassClass.php';
 
 $HTML = new HTMLGenertator\HTMLfile('View Marks', ['marks.css'], NULL, NULL, 1);
