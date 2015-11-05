@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../essentials/essentials.php';
+
 class Message {
 
     //Showing the message
