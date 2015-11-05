@@ -5,7 +5,7 @@ class Message {
     //Showing the message
     public static function show() {
 	if (Message::hasMessage()) {
-	    echo '<div id="m' . $_GET['mType'] . '" onload="show(this)">' .
+	    echo '<div id="m' . $_GET['mType'] . '">' .
 	    $_GET['message']
 	    . '</div>';
 	}

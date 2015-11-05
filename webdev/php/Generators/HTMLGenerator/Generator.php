@@ -44,7 +44,7 @@ class HTMLfile {
 	<!DOCTYPE html>
 	<html>
 	    <?php echo (string) $this->header; ?>
-	    <body>
+	    <body onload="show()">
 		<?php \Message::show(); ?>
 		<!-- Implementing the menu -->
 		<?php

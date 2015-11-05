@@ -1,8 +1,17 @@
-function show(element) {
-    element.style.visiblity = "visible";
-    setTimeout(hide(), 2000);
+var element;
+
+function show() {
+    var idSuc = document.getElementById('mSuc');
+    var idFail = document.getElementById('mError');
+    if (idFail == null) {
+	element = idSuc;
+	setTimeout(hide, 1000);
+    } else {
+	element = idFail;
+	setTimeout(hide, 1000);
+    }
 }
 
-function hide(element) {
-    element.style.visiblity = "hidden";
+function hide() {
+    element.style.display = "none";
 }
