@@ -4,11 +4,6 @@ namespace HTMLGenertator;
 
 class Header {
 
-    const NORMALMODE = 0;
-    const DARKMODE = 1;
-    const MOBILEMODE = 2;
-    const DEFAULTCHARSET = 'UTF-8';
-
     private $title;
     private $cssFiles = Array('main.css', 'menu.css');
     private $jsFiles = Array('messageMovement.js');
@@ -17,7 +12,7 @@ class Header {
     private $metaInformation = Array('charset' => Header::DEFAULTCHARSET);
 
     //Constructor for the object
-    public function __construct($pageTitle = '', $mode = Header::NORMALMODE) {
+    public function __construct($pageTitle = NULL, $mode = NULL) {
 	$this->title = $pageTitle;
 	$this->mode = (int) $mode;
     }
@@ -29,47 +24,27 @@ class Header {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Setter">
-
-    public function addCSS($cssFile) {
-	if ($cssFile != NULL) {
-	    if (is_array($cssFile)) {
-		for ($i = 0; $i < count($cssFile); $i++) {
-		    array_push($this->cssFiles, $cssFile[$i]);
-		}
-		return true;
+    private function addFile($fileToAdd, $arrayToPush) {
+	if (is_array($fileToAdd)) {
+	    for ($i = 0; $i < count($fileToAdd); $i++) {
+		array_push($arrayToPush, $fileToAdd[$i]);
 	    }
-	    array_push($this->cssFiles, $cssFile);
 	    return true;
 	}
+	array_push($arrayToPush, $fileToAdd);
 	return false;
+    }
+
+    public function addCSS($cssFile) {
+	return ($cssFile != NULL) ? $this->addFile($cssFile, $this->cssFiles) : false;
     }
 
     public function addJS($jsFile) {
-	if ($jsFile != NULL) {
-	    if (is_array($jsFile)) {
-		for ($i = 0; $i < count($jsFile); $i++) {
-		    array_push($this->jsFiles, $jsFile[$i]);
-		}
-		return true;
-	    }
-	    array_push($this->jsFiles, $jsFile);
-	    return true;
-	}
-	return false;
+	return ($jsFile != NULL) ? $this->addFile($jsFile, $this->jsFiles) : false;
     }
 
     public function addOther($otherStuff) {
-	if ($otherStuff != NULL) {
-	    if (is_array($otherStuff)) {
-		for ($i = 0; $i < count($otherStuff); $i++) {
-		    array_push($this->otherInformation, $otherStuff[$i]);
-		}
-		return true;
-	    }
-	    array_push($this->otherInformation, $otherStuff);
-	    return true;
-	}
-	return false;
+	return ($otherStuff != NULL) ? $this->addFile($otherStuff, $this->otherInformation) : false;
     }
 
     public function toogleMode($mode) {
@@ -113,25 +88,37 @@ class Header {
 	foreach ($this->metaInformation as $information => $value) {
 	    $result.="<meta $information=\"$value\" />";
 	}
-	$result .= '<!-- Stylesheets and Javascript -->';
+	$result .= '<!-- Stylesheets -->';
 	//Outputting the css files
+	$currentDir = $this->getDir();
 	foreach ($this->cssFiles as $file) {
-	    $result .= '<link rel="stylesheet" href="' . $this->getDir() . 'stylesheets/main/' . $file . '" />' . "\n";
+	    $result .= '<link rel="stylesheet" href="' . $currentDir . 'stylesheets/main/' . $file . '" />' . "\n";
 	    switch ($this->mode) {
-		case Header::DARKMODE:
-		    $result .= '<link rel="stylesheet" href="' . $this->getDir() . 'stylesheets/dark/' . $file . '" />' . "\n";
+		case HeaderMode::DARKMODE:
+		    $result .= '<link rel="stylesheet" href="' . $currentDir . 'stylesheets/dark/' . $file . '" />' . "\n";
 		    break;
-		case Header::MOBILEMODE:
-		    $result .= '<link rel="stylesheet" href="' . $this->getDir() . 'stylesheets/mobile/' . $file . '" />' . "\n";
+		case HeaderMode::MOBILEMODE:
+		    $result .= '<link rel="stylesheet" href="' . $currentDir . 'stylesheets/mobile/' . $file . '" />' . "\n";
 		    break;
 	    }
 	}
 	//Outputting the javascript files
+	$result .= '<!-- Javascript -->';
 	foreach ($this->jsFiles as $file) {
-	    $result.='<script type="text/javascript" src="' . $this->getDir() . 'js/' . $file . '"></script>' . "\n";
+	    $result .= '<script type="text/javascript" src="' . $currentDir . 'js/' . $file . '"></script>' . "\n";
 	}
 	$result .= '</head>';
 	return $result;
     }
+
+}
+
+class HeaderMode {
+
+    const NORMALMODE = 0;
+    const DARKMODE = 1;
+    const MOBILEMODE = 2;
+    const DEFAULTCHARSET = 'UTF-8';
+    const WINCHARSET = 'ANSI';
 
 }
