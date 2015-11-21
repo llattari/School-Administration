@@ -20,6 +20,9 @@ class HTMLfile {
     //Object constructor
     function __construct($pageName, $curCSS = NULL, $curJS = NULL, $other = NULL, $subdir = 0) {
 	connectDB();
+	if (!$this->shouldLoad()) {
+	    Header(__DIR__ . '/../../../../../help/featureNotEnabled.php');
+	}
 	$this->header = new Header($pageName);
 	$this->header->addCSS($curCSS);
 	$this->header->addJS($curJS);
@@ -65,6 +68,15 @@ class HTMLfile {
 	</body>
 	</html>
 	<?php
+    }
+
+    private function shouldLoad() {
+	$result = safeQuery('SELECT chatDisplay FROM admin__content;');
+	if (mysql_num_rows($result) != 0) {
+	    $row = mysql_fetch_row($result);
+	    return is_null($row[0]) || $row[0];
+	}
+	return true;
     }
 
 }
