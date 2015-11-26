@@ -41,7 +41,7 @@ class HTMLfile {
      */
     function outputHeader() {
 	if ($_SESSION['ui']['darkTheme']) {
-	    $this->header->toogleMode(Header::DARKMODE);
+	    $this->header->toogleMode(HeaderMode::DARKMODE);
 	}
 	?>
 	<!DOCTYPE html>

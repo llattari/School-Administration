@@ -8,8 +8,8 @@ class Header {
     private $cssFiles = Array('main.css', 'menu.css');
     private $jsFiles = Array('messageMovement.js');
     private $otherInformation = Array();
-    private $mode = Header::NORMALMODE;
-    private $metaInformation = Array('charset' => Header::DEFAULTCHARSET);
+    private $mode = HeaderMode::NORMALMODE;
+    private $metaInformation = Array('charset' => HeaderMode::DEFAULTCHARSET);
 
     //Constructor for the object
     public function __construct($pageTitle = NULL, $mode = NULL) {
@@ -24,34 +24,61 @@ class Header {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Setter">
-    private function addFile($fileToAdd, $arrayToPush) {
-	if (is_array($fileToAdd)) {
-	    for ($i = 0; $i < count($fileToAdd); $i++) {
-		array_push($arrayToPush, $fileToAdd[$i]);
-	    }
-	    return true;
+    private function addFile($fileToAdd, &$arrayToPush) {
+	if ($fileToAdd == NULL) {
+	    return false;
 	}
-	array_push($arrayToPush, $fileToAdd);
-	return false;
+	if (is_array($fileToAdd)) {
+	    $arrayToPush = array_merge($arrayToPush, $fileToAdd);
+	} else {
+	    array_push($arrayToPush, $fileToAdd);
+	}
+	return true;
     }
 
+    /**
+     * addCSS($cssFile)
+     * @param String $cssFile
+     * @return boolean
+     */
     public function addCSS($cssFile) {
 	return ($cssFile != NULL) ? $this->addFile($cssFile, $this->cssFiles) : false;
     }
 
+    /**
+     * addJS($jsFile)
+     * @param String $jsFile
+     * @return boolean
+     */
     public function addJS($jsFile) {
 	return ($jsFile != NULL) ? $this->addFile($jsFile, $this->jsFiles) : false;
     }
 
+    /**
+     * addOther($otherStuff)
+     * @param String $otherStuff
+     * @return boolean
+     */
     public function addOther($otherStuff) {
 	return ($otherStuff != NULL) ? $this->addFile($otherStuff, $this->otherInformation) : false;
     }
 
+    /**
+     * toogleMode($mode)
+     * 	    Toogles the display mode
+     * @param HeaderMode $mode
+     * @return HeaderMode
+     */
     public function toogleMode($mode) {
 	$this->mode = $mode;
 	return $this->mode;
     }
 
+    /**
+     * setMetaInformation($newInformation)
+     * @param Array $newInformation
+     * @return boolean
+     */
     public function setMetaInformation($newInformation) {
 	if (is_array($newInformation)) {
 	    foreach ($newInformation as $info => $value) {
