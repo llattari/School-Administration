@@ -1,17 +1,21 @@
 <?php
 require_once '../webdev/php/Generators/HTMLGenerator/Generator.php';
+require_once '../webdev/php/Classes/Overview.php';
 
 $HTML = new HTMLGenertator\HTMLfile('Overview', ['overview.css'], ['toggleElement.js']);
+$overview = new Overview($_SESSION['studentId']);
 $HTML->outputHeader();
 ?>
 <a href="#" title="Displays the next lesson">
     <div id="lesson" class="card" onContextMenu="return toggleVisibility(this);">
         <h1>Next Lesson</h1>
-        <p>
-            Maths in room A13.
-	    <br />
-            Starts at 9:30 pm.
-        </p>
+	<p>
+	    <?php
+	    $nextLesson = $overview->getNextLesson();
+	    echo "You're next lesson is: " . $nextLesson[0] . '(' . $nextLesson[1] . ')<br />
+	    It takes place in: "' . $nextLesson[3] . '" at ' . date('H:i', strtotime($nextLesson[2]));
+	    ?>
+	</p>
     </div>
 </a>
 <a href="#">
@@ -23,7 +27,16 @@ $HTML->outputHeader();
 <a href="#">
     <div id="news" class="card" onContextMenu="return toggleVisibility(this);">
         <h1>Important news</h1>
-        <p>No lesson off today.</p>
+        <p>
+	<ul>
+	    <?php
+	    $news = $overview->getImportantNews();
+	    for ($i = 0; $i < count($news); $i++) {
+		echo '<li>' . $news[$i] . '</li>';
+	    }
+	    ?>
+	</ul>
+	</p>
     </div>
 </a>
 <a href="#">
