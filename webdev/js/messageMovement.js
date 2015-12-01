@@ -1,3 +1,4 @@
+
 var element;
 
 function show() {
@@ -13,5 +14,9 @@ function show() {
 }
 
 function hide() {
-    element.style.display = "none";
+    if (element) {
+	element.style.display = "none";
+    } else {
+	window.console.log('Could not find object to hide');
+    }
 }
