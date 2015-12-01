@@ -39,6 +39,7 @@ class Overview {
 	    $row = mysql_fetch_assoc($result);
 	    return Array($row['subject'], $row['type'], $row['start'], $row['room']);
 	}
+	return NULL;
     }
 
     private function getNews() {
