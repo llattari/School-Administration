@@ -16,6 +16,7 @@
 }
 
 .colapsed{
+    border: 2px solid black;
     clear:both;
     width: 100%;
     margin: 1.5em 0em;
