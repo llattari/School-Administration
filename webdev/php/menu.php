@@ -50,8 +50,11 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 	$items[6] = new MenuEntry('friends/index.php', 'Friends');
 	$items[6]->addItem(new MenuEntry('friends/chat.php', 'Chat'));
 
+	//Forum
+	$items[7] = new MenuEntry('forum/index.php', 'Forum');
+
 	//Logout
-	$items[7] = new MenuEntry('logOut.php', 'Log out');
+	$items[8] = new MenuEntry('logOut.php', 'Log out');
 
 	$menu->setItem($items);
 	echo (string) $menu;
