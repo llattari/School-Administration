@@ -17,6 +17,23 @@
     width: 15%;
 }
 
+#newMessage{
+    margin-left: 1em;
+    width: 80%;
+}
+
+/* Formating the chat content */
+.daysPassed{
+    width: 100%;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    text-align: center;
+}
+
+#messages, .daysPassed{
+    line-height: 1.5;
+}
+
 /* Formating the iframe */
 
 iframe{
