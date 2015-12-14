@@ -1,8 +1,8 @@
 <?php
 
-include_once '.. /../webdev/php/Classes/Messages.php';
-include_once '../../webdev/php/Classes/debuging/Logger.php';
-include_once '../../webdev/php/essentials/databaseEssentials.php';
+require_once '../../webdev/php/Classes/Messages.php';
+require_once '../../webdev/php/Classes/debuging/Logger.php';
+require_once '../../webdev/php/essentials/databaseEssentials.php';
 
 connectDB();
 session_start();
@@ -35,6 +35,7 @@ if (strlen($message) != 0) {
     }
     $replacedMessage = join(' ', $wordList);
     $suc = safeQuery("INSERT INTO chat__messages(message, sender) VALUES ('$replacedMessage', $sender);");
+    safeQuery("INSERT INTO chat__online (lastAction, userId)VALUES(NOW(),$sender) ON DUPLICATE KEY UPDATE lastAction=NOW();");
     Logger::log('User send a chat message.', Logger::SOCIAL);
     Header('Location: chat.php');
 } else {
