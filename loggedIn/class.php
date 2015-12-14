@@ -1,6 +1,5 @@
 <?php
 //Including everthing
-require_once '../webdev/php/Classes/Mark.php';
 require_once '../webdev/php/Classes/ClassClass.php';
 require_once '../webdev/php/Generators/HTMLGenerator/Generator.php';
 
@@ -13,7 +12,7 @@ if(isset($_GET['classID']) && intval($_GET['classID'])){
     $cID = $_GET['classID'];
     $class = new StudentClass($cID);
     if($class->isValid()){
-	$marks = new MarkAdministration\Subject($_SESSION['studentId'], $cID);
+	$marks = new Subject($_SESSION['studentId'], $cID);
 	echo '<h1>Information about the course: ' . $class . '</h1>';
 	?>
 	<br />
