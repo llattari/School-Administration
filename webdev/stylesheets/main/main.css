@@ -55,8 +55,9 @@ a{ color:black;}
     width: 70%;
 }
 
-/* Centering a block object */
+/* Genral classes */
 .centerMargin{ margin:auto; }
+.underline{ text-decoration: underline; }
 
 /* Style of the pop-in messages */
 #mError, #mSuc{
