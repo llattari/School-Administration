@@ -25,7 +25,7 @@ $result = safeQuery('
 		mail AS "E-Mail",
 		CONCAT(phone,"<br />", COALESCE(mobile,"no mobile")) AS "Phone & Mobile",
 		CONCAT(street,"<br />", postalcode, " ", region) AS "Adress",
-		birthday AS "Birthday",
+		UNIX_TIMESTAMP(birthday) AS "Birthday",
 		CONCAT(status, "<br />", COALESCE(grade,"none")) AS "Status",
 		username AS "Username",
 		CONCAT("<a href=\"delete.php?id=", id,"\">Delete</a>") AS "Delete"
@@ -34,10 +34,16 @@ $result = safeQuery('
 $num = mysql_num_rows($result);
 echo '<p>There are ' . $num . ' users registered.</p>';
 if ($num != 0) {
-    $row = mysql_fetch_assoc($result);
-    echo '<table><tr>' . generateTableHead(array_keys($row)) . '</tr>';
-    echo '<tr>' . generateTableRow(array_values($row)) . '</tr>';
+    $first = true;
+    echo '<table>';
     while ($row = mysql_fetch_assoc($result)) {
+	if ($first) {
+	    echo '<tr>' . generateTableHead(array_keys($row)) . '</tr>';
+	    $first = false;
+	}
+	if ($row['ID'] == $_SESSION['studentId']) {
+	    $row['Delete'] = 'Can\'t<br />delete';
+	}
 	echo '<tr>' . generateTableRow(array_values($row)) . '</tr>';
     }
     echo '</table>';
