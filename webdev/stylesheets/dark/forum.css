@@ -1,0 +1,7 @@
+p#forumDescription{
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+#topicArea ul li p{
+    color: #808080;
+}

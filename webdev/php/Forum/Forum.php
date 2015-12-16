@@ -6,23 +6,35 @@ class Forum {
 
     private $id = 0;
     private $name, $description = '';
-    private $parent = 0;
 
     /**
      * Creates a new Forum object based on the id inputed. If the id was not found the forum will be not initialised.
      * @param int $id
      * @return object
      */
-    function __construct($id) {
+    public function __construct($id) {
 	$this->id = (int) $id;
-	$result = safeQuery("SELECT forumName, forumDescription, parent FROM forum__forums WHERE id=$this->id;");
+	$result = safeQuery("SELECT forumName, forumDescription FROM forum__forums WHERE id=$this->id;");
 	if (mysql_numrows($result) != 1) {
-	    return;
+	    $this->createIt();
+	} else {
+	    $row = mysql_fetch_assoc($result);
+	    $this->name = $row['forumName'];
+	    $this->description = $row['description'];
 	}
-	$row = mysql_fetch_assoc($result);
-	$this->name = $row['forumName'];
-	$this->description = $row['description'];
-	$this->parent = $row['parent'];
+    }
+
+    private function createIt() {
+	$selectClassInformation = safeQuery('SELECT subject FROM course__overview WHERE id=' . $this->id . ';');
+	if (mysql_num_rows($selectClassInformation) == 1) {
+	    $row = mysql_fetch_assoc($selectClassInformation);
+	    $subject = $row['subject'];
+	    $this->name = "$subject's forum";
+	    $this->description = "This is the default forum for this class.";
+	    $insert = safeQuery("INSERT INTO forum__forums VALUES(NULL, '$this->name','$this->description', NULL);");
+	    return (bool) $insert;
+	}
+	return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter">
@@ -52,14 +64,6 @@ class Forum {
     }
 
     /**
-     * Returns the id of the parent forum
-     * @return int
-     */
-    public function getParent() {
-	return $this->parent;
-    }
-
-    /**
      * Returns the id of the creator of the forum
      * @return int
      */
@@ -72,6 +76,10 @@ class Forum {
 	return -1;
     }
 
+    /**
+     * Returns an array of all topic ids
+     * @return array
+     */
     public function getTopics() {
 	$result = safeQuery('SELECT id FROM forum__topic WHERE forumId = ' . $this->id . ';');
 	if (mysql_num_rows($result) == 0) {
