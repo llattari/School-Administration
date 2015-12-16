@@ -10,7 +10,7 @@
  */
 function connectDB() {
     $connection = mysql_connect('localhost', 'headmasterLogin', '7YUCmLdQ8eByUu57');
-    if($connection){
+    if ($connection) {
 	$connection = mysql_select_db('schulverwaltung') or die('Database connection failed!');
     }
     return $connection == true;
@@ -38,18 +38,20 @@ function escapeStr($input) {
  * 	The name of the script that is executing this
  * @return SQLresult
  */
-function safeQuery($query) {
+function safeQuery($query, $debug = true) {
     $success = mysql_query($query);
-    if(!$success){
-	$escapedQuery = mysql_real_escape_string($query);
+    $error = mysql_error();
+    if (!$success) {
+	$escapedQuery = trim(mysql_real_escape_string($query));
+	$escapedError = mysql_real_escape_string($error);
+	echo ($debug) ? $error : '';
 	//Getting the script that executes that query.
 	$url = explode('?', $_SERVER['REQUEST_URI']);
 	$script = $url[0];
 	//If there are parameters set pass it to the variable otherwise set it NULL
 	$paramList = (strlen($_SERVER['QUERY_STRING']) == 0) ? NULL : mysql_real_escape_string($_SERVER['QUERY_STRING']);
 	//Issue query
-	mysql_query('INSERT INTO debug__debugger
-	    VALUES(NULL, "' . $escapedQuery . '","' . $script . '", "' . $paramList . '", "' . escapeStr(mysql_error()) . '");');
+	mysql_query("INSERT INTO debug__debugger VALUES (NULL, '$escapedQuery','$script', '$paramList', '$escapedError');");
     }
     return $success;
 }
