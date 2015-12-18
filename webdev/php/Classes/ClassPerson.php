@@ -87,19 +87,21 @@ class ClassPerson {
      * @static
      * Returns the name of a person without initing an object
      * @param int $id
-     *	    The id of the person of whom you want the name
+     * 	    The id of the person of whom you want the name
      * @return string
-     *	    The Name as a string
+     * 	    The Name as a string
      */
     public static function staticGetName($id) {
-	if (intval($id) != 0) {
-	    $result = safeQuery("SELECT CONCAT(`name`, '  ', surname) FROM user__overview WHERE id = $id;");
-	    if (mysql_num_rows($result) == 1) {
-		$row = mysql_fetch_row($result);
-		return $row[0];
-	    }
+	if (is_int($id)) {
+	    $intId = $id;
+	} else {
+	    $intId = -1;
 	}
-	return '';
+	$result = safeQuery("SELECT CONCAT(`name`, '  ', surname) FROM user__overview WHERE id = $intId;");
+	if (mysql_num_rows($result) == 1) {
+	    $row = mysql_fetch_row($result);
+	    return $row[0];
+	}
     }
 
 }
