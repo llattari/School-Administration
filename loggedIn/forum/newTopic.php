@@ -1,6 +1,6 @@
 <?php
 require_once '../../webdev/php/Generators/HTMLGenerator/Generator.php';
-require_once '../../webdev/php/Forum/Forum.php';
+require_once '../../webdev/php/Forum/Section.php';
 require_once '../../webdev/php/Classes/Messages.php';
 
 //Setting up the HTML and the forum object
@@ -9,7 +9,7 @@ if (!isset($_GET['forumId'])) {
     Message::castMessage('Please select a forum first.', false, 'index.php');
 }
 $id = (int) $_GET['forumId'];
-$forum = new Forum($id);
+$forum = new Section($id);
 
 //Beginning the HTML page
 $HTML->outputHeader();

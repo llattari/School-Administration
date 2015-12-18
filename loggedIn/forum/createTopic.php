@@ -1,7 +1,7 @@
 <?php
 
 //Setting up
-require_once '../../webdev/php/Forum/Forum.php';
+require_once '../../webdev/php/Forum/Section.php';
 require_once '../../webdev/php/Classes/Messages.php';
 require_once '../../webdev/php/essentials/databaseEssentials.php';
 session_start();
