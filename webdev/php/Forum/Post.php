@@ -4,7 +4,7 @@ class Post {
 
     private $id = 0;
     private $message = '';
-    private $poster = 0;
+    private $creator = 0;
     private $time = 0;
 
     public function __construct($id) {
@@ -15,7 +15,7 @@ class Post {
 	}
 	$row = mysql_fetch_assoc($result);
 	$this->message = $row['post'];
-	$this->poster = $row['poster'];
+	$this->creator = $row['poster'];
 	$this->time = strtotime($row['postTime']);
     }
 
@@ -41,8 +41,8 @@ class Post {
      * Returns the id of the poster
      * @return int
      */
-    public function getPoster() {
-	return $this->poster;
+    public function getCreator() {
+	return $this->creator;
     }
 
     /**
