@@ -1,6 +1,7 @@
 <?php
 
 class Lesson {
+
     private $id, $class, $time, $location, $teacherId, $valid;
 
     /**
@@ -9,8 +10,9 @@ class Lesson {
      * @param timestamp $curTime
      * @return object
      */
-    function __construct($studenId, $curTime) {
+    function __construct($studenId, $curTime = null) {
 	$this->id = (int) $studenId;
+	$start = is_null($curTime) ? time() : $curTime;
 	$result = safeQuery(
 		'SELECT DISTINCT
 		    course__overview.id AS "id",
@@ -24,12 +26,13 @@ class Lesson {
 		JOIN course__student ON course__overview.id = course__student.classID
 		JOIN timetable__standardTimes  ON timetable__standardTimes.id = timetable__overview.lesson
 		WHERE
-		    `day` = ' . date('N', $curTime) . '
-		    AND ("' . date('H:i:s', $curTime) . '" BETWEEN timetable__standardTimes.`start` AND timetable__standardTimes.`end`)
-		    AND (course__overview.teacherID = ' . $this->id . ' OR course__student.studentID = ' . $this->id . ');'
+		    `day` = ' . date('N', $start) . '
+		AND ("' . date('H:i:s', $start) . '" BETWEEN timetable__standardTimes.`start` AND timetable__standardTimes.`end`)
+		AND (course__overview.teacherID = ' . $this->id . ' OR course__student.studentID = ' . $this->id . ');'
 	);
-	if(mysql_num_rows($result) == 0){
+	if (mysql_num_rows($result) == 0) {
 	    $this->valid = false;
+	    return;
 	}
 	$row = mysql_fetch_assoc($result);
 	$this->valid = true;
@@ -38,7 +41,6 @@ class Lesson {
 	$this->time = Array($row['start'], $row['end']);
 	$this->location = $row['room'];
 	$this->initId();
-	return $this->valid;
     }
 
     /**
@@ -49,12 +51,12 @@ class Lesson {
 	$started = date('Y-m-d, H:i:s', strtotime($this->time[0]));
 	$classId = $this->class[0];
 	$existsSELECT = safeQuery("SELECT id FROM lesson__overview WHERE classId = $classId AND started = \"$started\";");
-	if(mysql_num_rows($existsSELECT) == 0){
+	if (mysql_num_rows($existsSELECT) == 0) {
 	    safeQuery("INSERT INTO lesson__overview(classId, started)
                                 VALUES($classId, \"$started\");");
 	    $this->id = mysql_insert_id();
 	    Logger::log('Created a new lesson with the id: ' . $this->id, Logger::LESSONMANAGEMENT);
-	}else{
+	} else {
 	    $row = mysql_fetch_row($existsSELECT);
 	    $this->id = $row[0];
 	}

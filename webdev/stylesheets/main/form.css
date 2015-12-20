@@ -4,8 +4,8 @@ form{
 }
 
 form table{
-    width:100%;
     line-height: 1.5;
+    width: 100%;
 }
 
 fieldset{
@@ -30,9 +30,9 @@ input{
 }
 
 textarea{
+    margin-left: 1em;
     padding: 3px;
     width: 80%;
-    margin-left: 1em;
 }
 
 select{
@@ -41,9 +41,10 @@ select{
 }
 
 button{
-    min-width: 5em;
-    margin-top: .2em;
     background-color: gray;
     border: 2px solid black;
     border-radius: 1em;
+    min-width: 5em;
+    margin-top: .2em;
+    padding: .1em .3em;
 }

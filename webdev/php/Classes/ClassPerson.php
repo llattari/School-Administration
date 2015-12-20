@@ -91,13 +91,10 @@ class ClassPerson {
      * @return string
      * 	    The Name as a string
      */
-    public static function staticGetName($id) {
-	if (is_int($id)) {
-	    $intId = $id;
-	} else {
-	    $intId = -1;
-	}
-	$result = safeQuery("SELECT CONCAT(`name`, '  ', surname) FROM user__overview WHERE id = $intId;");
+    public static function staticGetName($id, $nickname = true) {
+	$intId = intval($id);
+	$column = $nickname ? 'username' : 'CONCAT(`name`, " " , surname)';
+	$result = safeQuery("SELECT $column FROM user__overview WHERE id = $intId;");
 	if (mysql_num_rows($result) == 1) {
 	    $row = mysql_fetch_row($result);
 	    return $row[0];

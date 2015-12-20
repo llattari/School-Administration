@@ -36,7 +36,7 @@ echo "<h1>Change the $settingsName's setting</h1>";
 	<br />
 	Creator: <?php
 	$creator = (int) $object->getCreator();
-	echo ClassPerson::staticGetName($creator);
+	echo ClassPerson::staticGetName($creator, $_SESSION['nickName']);
 	?>
     </fieldset>
     <button type="submit">Save settings</button>

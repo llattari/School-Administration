@@ -49,7 +49,7 @@ $subList = $object->getSubList();
 		    $message = substr($subItem->getDescription(), 0, 50);
 		} else {
 		    $subItem = new Post($subList[$i]);
-		    $heading = ClassPerson::staticGetName((int) $subItem->getCreator()) . ' says: ';
+		    $heading = ClassPerson::staticGetName((int) $subItem->getCreator(), $_SESSION['nickName']) . ' says: ';
 		    $message = $subItem->getMessage();
 		}
 		echo

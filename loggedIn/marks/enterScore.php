@@ -66,7 +66,7 @@ if (mysql_num_rows($result) == 0) {
 		foreach ($markArray as $key => $value) {
 		    $sum = 0;
 		    echo '<tr>';
-		    echo '<td>' . ClassPerson::staticGetName($key) . '</td>';
+		    echo '<td>' . ClassPerson::staticGetName($key, $_SESSION['nickName']) . '</td>';
 		    for ($i = 0; $i < $taskCount; $i++) {
 			$outScore = isset($value[$i]) ? $value[$i] : 0;
 			$sum += $outScore;

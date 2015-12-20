@@ -6,7 +6,7 @@ require_once '../../webdev/php/Classes/Lesson.php';
 
 #Initing objects
 $HTML = new HTMLGenertator\HTMLfile('Your class', ['table.css', 'form.css', 'lesson.css'], NULL, NULL, 1);
-$lesson = new Lesson($_SESSION['studentId'], strtotime('14.5.2015 15:30'));
+$lesson = new Lesson($_SESSION['studentId']);
 
 $HTML->outputHeader();
 if (!$lesson->takesPlace()) {
@@ -21,11 +21,11 @@ if (!$lesson->takesPlace()) {
 <h1>Your current lesson</h1>
 <p class="twoCols">
     Name: <?php echo $lesson->getClassName(); ?>
-    by <?php echo ClassPerson::staticGetName($lesson->getTeacherId()); ?>
+    by <?php echo ClassPerson::staticGetName($lesson->getTeacherId(), $_SESSION['nickName']); ?>
     <br />
     Takes place at: <?php echo $lesson->getLocation(); ?>
     <br />
-    Started: <?php echo $lesson->getStartingTime(); ?> o'clock
+    Starts: <?php echo $lesson->getStartingTime(); ?> o'clock
     <br />
     Ends: <?php echo $lesson->getEndingTime(); ?> o'clock
 </p>
@@ -78,8 +78,8 @@ if ($_SESSION['teacher']) {
 		echo '<td></td><td></td>';
 	    } else {
 		echo
-		'<td><input type="checkbox" checked="checked" name="attend[]" value="'.$id.'" /></td>
-		    <td><input type="checkbox" checked="checked" name="homework[]" value="'.$id.'" /></td>';
+		'<td><input type="checkbox" checked="checked" name="attend[]" value="' . $id . '" /></td>
+		    <td><input type="checkbox" checked="checked" name="homework[]" value="' . $id . '" /></td>';
 	    }
 	}
 	echo '<td>';
@@ -95,7 +95,7 @@ if ($_SESSION['teacher']) {
 <?php
 if ($_SESSION['teacher']) {
     echo
-	'<br />
+    '<br />
 	<button type="submit">Submit changes</button>
 	</form>';
 }

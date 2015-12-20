@@ -34,23 +34,23 @@ $HTML->outputHeader();
     <!-- Allowing the student to change his password -->
     <fieldset>
         <legend>Change password:</legend>
-        Old password: <input type="password" name="oldPsw" value="" />
+        Old password: <input type="password" name="oldPsw" placeholder="old one" />
         <br />
-        New password: <input type="password" name="newPswOne" value="" />
+        New password: <input type="password" name="newPswOne" placeholder="new one" />
         <br />
-        re-type password: <input type="password" name="newPswTwo" value="" />
+	Re-type password: <input type="password" name="newPswTwo" placeholder="new one again" />
     </fieldset>
     <!-- Altering the look and feel of the page -->
     <fieldset>
         <legend>UI Settings</legend>
         <label>
-            <input type="checkbox" name="names" <?php echo isChecked($_SESSION['ui']['markNames']) ? 'checked=""' : ''; ?> />
-            Should the marks be displayed as words?
+            <input type="checkbox" name="nickName" <?php echo isChecked($_SESSION['ui']['nickName']) ? 'checked=""' : ''; ?> />
+            Use nickname instead of the real names?
         </label>
         <br />
         <label>
-            <input type="checkbox" name="dark" <?php echo isChecked($_SESSION['ui']['nickName']) ? 'checked=""' : ''; ?> />
-            Should the user be referenced by nicknames?
+            <input type="checkbox" name="markNames" <?php echo isChecked($_SESSION['ui']['markNames']) ? 'checked=""' : ''; ?> />
+            Should the marks be displayed as words?
         </label>
 	<br />
 	<label>
@@ -58,8 +58,11 @@ $HTML->outputHeader();
             Enable the dark mode of the web-site
         </label>
     </fieldset>
-    <button type="submit">Submit changes</button>
-    <button type="reset">Reset changes</button>
+    <fieldset>
+	<legend>Submitting</legend>
+	<button type="submit">Submit changes</button>
+	<button type="reset">Reset changes</button>
+    </fieldset>
 </form>
 <?php
 $HTML->outputFooter();
