@@ -18,7 +18,6 @@ $psw = escapeStr($_POST['psw']);
 function createSESSION($query) {
     session_start();
     $result = safeQuery($query);
-    echo mysql_error();
     if (mysql_num_rows($result) != 1) {
 	return false;
     }
@@ -71,7 +70,7 @@ if (mysql_num_rows($passwordResult) == 0) {
     $suc = createSESSION(
 	    "SELECT
 		user__overview.id AS 'id',
-		grade, status, markNames, darkTheme
+		user__interface.*
 	    FROM user__overview
 	    JOIN user__interface ON user__interface.id = user__overview.id
 	    WHERE user__overview.id = $userId;");

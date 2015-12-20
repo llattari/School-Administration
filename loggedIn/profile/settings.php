@@ -26,7 +26,7 @@ $HTML->outputHeader();
         Status:
 	<?php
 	echo $statusArray[$settings->getStatus()];
-	if($settings->getStatus() == 's'){
+	if ($settings->getStatus() == 's') {
 	    echo ' in Grade ' . $settings->getGrade();
 	}
 	?>
@@ -49,6 +49,11 @@ $HTML->outputHeader();
         </label>
         <br />
         <label>
+            <input type="checkbox" name="dark" <?php echo isChecked($_SESSION['ui']['nickName']) ? 'checked=""' : ''; ?> />
+            Should the user be referenced by nicknames?
+        </label>
+	<br />
+	<label>
             <input type="checkbox" name="dark" <?php echo isChecked($_SESSION['ui']['darkTheme']) ? 'checked=""' : ''; ?> />
             Enable the dark mode of the web-site
         </label>
