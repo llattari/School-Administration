@@ -14,7 +14,7 @@ if (!isset($_POST['topicId'])) {
     $topicId = (int) $_POST['topicId'];
 }
 
-$topicPath = 'readTopic.php?topicId=' . $topicId;
+$topicPath = 'readForum.php?topicId=' . $topicId;
 
 //Check if the postMessage was not empty
 if (!isset($_POST['postMessage'])) {

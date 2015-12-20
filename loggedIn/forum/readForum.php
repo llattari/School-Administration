@@ -20,6 +20,8 @@ if (isset($_GET['forumId'])) {
 if ($object == NULL) {
     Header('Location: index.php');
 }
+$type = $object->getType();
+$subType = ($type == 'forum') ? 'topic' : 'post';
 $subList = $object->getSubList();
 ?>
 
@@ -33,10 +35,10 @@ $subList = $object->getSubList();
 <!-- Outputting the topics-->
 <div id="topicArea">
     <ul>
-	<?php if (is_null($subList)) { ?>
+	<?php if (empty($subList)) { ?>
     	<li>
-    	    <h3>There are no things to display.</h3>
-    	    <p>Post a new topic down below.</p>
+    	    <h3>There are no <?php echo $subType . 's'; ?> to display.</h3>
+    	    <p>Create a new <?php echo $subType; ?> down below.</p>
     	</li>
 	    <?php
 	} else {
@@ -58,7 +60,7 @@ $subList = $object->getSubList();
     </ul>
 </div>
 <?php
-if ($object->getType() == 'forum') {
+if ($type == 'forum') {
     echo '<a href="newTopic.php?forumId=' . $intId . '">Create new topic</a>';
 } else {
     ?>

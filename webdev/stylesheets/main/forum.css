@@ -5,8 +5,13 @@ p#forumDescription{
 }
 
 /* Topics and Posts */
+#topicArea > a{
+    margin-left: 1em;
+}
+
 #topicArea ul{
     list-style: none;
+    width: 90%;
 }
 
 #topicArea ul li{
