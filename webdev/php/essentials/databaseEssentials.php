@@ -1,10 +1,7 @@
 <?php
 
-//----------------------- DATABASE TOOLS -----------------------
-
 /**
- * connectDB()
- *       Connects to the database and therefore stores the information in this place.
+ * Connects to the database and therefore stores the information in this place.
  * @return boolean
  *      If the connection failed, it returns false
  */
@@ -13,12 +10,11 @@ function connectDB() {
     if ($connection) {
 	$connection = mysql_select_db('schulverwaltung') or die('Database connection failed!');
     }
-    return $connection == true;
+    return $connection;
 }
 
 /**
- * escapeStr($input)
- *      Escapes a string and makes it ready for database-insertion
+ * Escapes a string and makes it ready for database-insertion
  * @param String $input
  *      The String that should be escaped
  * @return String
@@ -30,12 +26,11 @@ function escapeStr($input) {
 }
 
 /**
- * safeQuery()
- * 	Offers debugging information and saves it to the database
+ * Offers debugging information and saves it to the database
  * @param String $query
  * 	The query that you want to execute
- * @param String $script
- * 	The name of the script that is executing this
+ * @param boolean $debug
+ * 	Should this querry be debugged (outputting errors)
  * @return SQLresult
  */
 function safeQuery($query, $debug = true) {

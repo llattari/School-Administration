@@ -20,22 +20,10 @@ function isIn($search, $string) {
  * @return boolean
  */
 function check($mail = NULL, $tel = NULL, $zip = NULL) {
-    if ($mail != NULL) {
-	if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-	    return false;
-	}
-    }
-    if ($tel != NULL) {
-	if (preg_match('/(\d{4}[ -\/]?)?\d+/is', $tel) == 0) {
-	    return false;
-	}
-    }
-    if ($zip != NULL) {
-	if (preg_match('/\d+/is', $zip) == 0) {
-	    return false;
-	}
-    }
-    return true;
+    $mailValid = ($mail != NULL && !filter_var($mail, FILTER_VALIDATE_EMAIL));
+    $telValid = ($tel != NULL && (bool) preg_match('/(\d{4}[ -\/]?)?\d+/is', $tel));
+    $zipValid = ($zip != NULL && (bool) preg_match('/\d+/is', $zip) == 0);
+    return $mailValid || $telValid || $zipValid;
 }
 
 /**
@@ -44,7 +32,7 @@ function check($mail = NULL, $tel = NULL, $zip = NULL) {
  * @return boolean
  */
 function validId($var) {
-    return $var > 0;
+    return ((int) $var) > 0;
 }
 
 /**
