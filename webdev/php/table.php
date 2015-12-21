@@ -1,7 +1,8 @@
 <?php
 
 function getTimetable() {
-    $queryTable = 'SELECT
+    $queryTable = '
+	SELECT
 	    course__overview.subject AS "subject",
 	    day, lesson, room
         FROM course__student
@@ -18,25 +19,14 @@ function getTimetable() {
     if (!$result) {
 	return '';
     }
-    $final = '<tr><td>' . $times[0] . '</td>';
-    $day = $hour = 1;
-    while ($row = mysql_fetch_assoc($result)) {
-	if ($hour != $row['lesson']) {
-	    while ($hour != $row['lesson'] + 1) {
-		$final.= '</tr><tr><td>' . $times[$row['lesson'] - 1];
-		$hour++;
-	    }
-	    $day = 1;
-	}
-	while ($day < $row['day']) {
-	    $final.= '<td class="free">Freetime</td>';
-	    $day++;
-	}
-	$final.= '<td>' . dataToString($row) . '</td>';
-	$day++;
+    $allData = Array();
+    for ($i = 0; $i < count($times); $i++) {
+	$allData[$i] = Array($times[$i]);
     }
-    $final.= '</tr>';
-    return $final;
+    while ($row = mysql_fetch_assoc($result)) {
+	$allData[$row['lesson']][$row['day']] = dataToString($row);
+    }
+    return $allData;
 }
 
 /**
@@ -46,7 +36,7 @@ function getTimetable() {
  * @return type
  */
 function dataToString($arrayData) {
-    return $arrayData['subject'] . '<br /> (' . $arrayData['room'] . ')';
+    return $arrayData['subject'] . '<br />(' . $arrayData['room'] . ')';
 }
 
 /**
