@@ -29,6 +29,10 @@ input{
     width: 40%;
 }
 
+input[type="checkbox"]{
+    width: auto;
+}
+
 textarea{
     margin-left: 1em;
     padding: 3px;
