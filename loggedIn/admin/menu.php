@@ -24,6 +24,7 @@ if (!in_array('admin', $perms)) {
 	//Overview features
 	$items[1] = new MenuEntry('admin/course/list.php', 'Course overview');
 	$items[1]->addItem(new MenuEntry('admin/course/change.php', 'Change course'));
+	$items[1]->addItem(new MenuEntry('admin/course/add.php', 'Add course'));
 
 	//Content settings
 	$items[2] = new MenuEntry('admin/contentSystem.php', 'Content settings');
