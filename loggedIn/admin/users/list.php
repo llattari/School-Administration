@@ -28,7 +28,7 @@ if (isset($_GET['show'])) {
 <!-- Start of the content -->
 <h1>List of all students and teachers</h1>
 <hr />
-<form class="splitThree" method="GET" style="margin: auto;text-align: center;">
+<form class="threeCols center" method="GET">
     <span>Order by:
 	<select name="order">
 	    <?php

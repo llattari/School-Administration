@@ -32,7 +32,7 @@ if (!$lesson->takesPlace()) {
 <h2>Student list</h2>
 <?php
 if ($_SESSION['teacher']) {
-    echo '<form method="POST" class="centerMargin" action="setAttendence.php">
+    echo '<form method="POST" class="center" action="setAttendence.php">
 	<!-- Hidden fields -->
 	<input type="hidden" value="' . $lesson->getId() . '" name="lessonId" />
 	Topic: <input type="text" placeholder="Set topic of the lesson" id="lessonTopic" />';

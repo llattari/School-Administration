@@ -12,20 +12,3 @@ hr{
     width: 90%;
     margin: auto;
 }
-
-/* Floating objects */
-.clear{
-    clear: both;
-}
-
-.splitTwo > *{
-    display: block;
-    float: left;
-    width: 50%;
-}
-
-.splitThree > *{
-    display: block;
-    float: left;
-    width: 33.3%;
-}

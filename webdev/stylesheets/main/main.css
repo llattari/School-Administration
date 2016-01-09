@@ -45,6 +45,15 @@ a{ color:black;}
     -moz-column-gap:1em;
 }
 
+.threeCols{
+    column-count:3;
+    -webkit-column-count:3;
+    -moz-column-count:3;
+    column-gap:1em;
+    -webkit-column-gap:1em;
+    -moz-column-gap:1em;
+}
+
 .left{
     float: left;
     width: 30%;
@@ -56,8 +65,17 @@ a{ color:black;}
 }
 
 /* Genral classes */
-.centerMargin{ margin:auto; }
 .underline{ text-decoration: underline; }
+
+.center{
+    margin:auto;
+    text-align: center;
+}
+
+/* Floating objects */
+.clear{
+    clear: both;
+}
 
 /* Style of the pop-in messages */
 #mError, #mSuc{
