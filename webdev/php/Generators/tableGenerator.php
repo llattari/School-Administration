@@ -12,8 +12,8 @@ function generateSpecialRow($inTR, $arrayOfTDs) {
     return $finalString;
 }
 
-function generateTableRow($arrayOfTDs) {
-    return generateSpecialRow('', $arrayOfTDs);
+function generateTableRow($arrayOfTDs, $specials = '') {
+    return generateSpecialRow($specials, $arrayOfTDs);
 }
 
 function generateTableHead($arrayOfHeadVals) {

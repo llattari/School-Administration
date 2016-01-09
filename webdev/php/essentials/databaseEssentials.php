@@ -50,3 +50,25 @@ function safeQuery($query, $debug = true) {
     }
     return $success;
 }
+
+/**
+ * Get the field names aquired by the querry.
+ * @param SQL $querry
+ * @return array
+ */
+function getFields($querry, $all = true) {
+    if (!$querry) {
+	return Array();
+    }
+    $result = Array();
+    $numFields = mysql_num_fields($querry);
+    for ($i = 0; $i < $numFields; $i++) {
+	$fieldName = mysql_field_name($querry, $i);
+	if ($all){
+	    array_push($result, $fieldName);
+	}elseif (ctype_upper($fieldName[0])) {
+	    array_push($result, $fieldName);
+	}
+    }
+    return $result;
+}
