@@ -5,3 +5,27 @@
 body{
     background-color: #3C3C3C;
 }
+
+/* Adapting hr line */
+hr{
+    background-color: black;
+    width: 90%;
+    margin: auto;
+}
+
+/* Floating objects */
+.clear{
+    clear: both;
+}
+
+.splitTwo > *{
+    display: block;
+    float: left;
+    width: 50%;
+}
+
+.splitThree > *{
+    display: block;
+    float: left;
+    width: 33.3%;
+}
