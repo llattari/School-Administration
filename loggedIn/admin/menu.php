@@ -20,11 +20,10 @@ if (!in_array('admin', $perms)) {
 	//$items[0]->addItem(new MenuEntry('admin/users/perms.php', 'List permissions'));
 	$items[0]->addItem(new MenuEntry('admin/users/change.php', 'Change profile'));
 	$items[0]->addItem(new MenuEntry('admin/users/create.php', 'Create User'));
-	$items[0]->addItem(new MenuEntry('admin/users/delete.php', 'Delete User'));
 
 	//Overview features
-	$items[1] = new MenuEntry('admin/activeClasses.php', 'Course overview');
-	$items[1]->addItem(new MenuEntry('admin/changeClass.php', 'Change course'));
+	$items[1] = new MenuEntry('admin/course/list.php', 'Course overview');
+	$items[1]->addItem(new MenuEntry('admin/course/change.php', 'Change course'));
 
 	//Content settings
 	$items[2] = new MenuEntry('admin/contentSystem.php', 'Content settings');
