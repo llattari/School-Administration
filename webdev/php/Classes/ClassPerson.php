@@ -3,6 +3,7 @@
 class ClassPerson {
 
     private $name = Array();
+    private $profilePic = NULL;
     private $contacts = Array();
     private $bDate = 0;
     private $status = 's';
@@ -14,6 +15,7 @@ class ClassPerson {
 	    if (mysql_num_rows($result) == 1) {
 		$row = mysql_fetch_assoc($result);
 		$this->name = array($row['name'], $row['surname'], $row['username']);
+		$this->profilePic = NULL;
 		$this->contacts = array(
 		    'email' => $row['mail'],
 		    'phone' => $row['phone'],
@@ -40,6 +42,14 @@ class ClassPerson {
      */
     public function getName() {
 	return $this->name;
+    }
+
+    /**
+     * Returns the url of the profile picutre of the user.
+     * @return string
+     */
+    public function getProfilePic() {
+	return (is_null($this->profilePic)) ? '' : $this->profilePic;
     }
 
     /**
