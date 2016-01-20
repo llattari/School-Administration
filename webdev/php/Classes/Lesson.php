@@ -38,9 +38,9 @@ class Lesson {
 	}
 	$row = mysql_fetch_assoc($result);
 	$this->valid = true;
-	$this->class = Array($row['id'], $row['abbr']);
+	$this->class = [$row['id'], $row['abbr']];
 	$this->teacherId = $row['teacherId'];
-	$this->time = Array($row['start'], $row['end']);
+	$this->time = [$row['start'], $row['end']];
 	$this->location = $row['room'];
 	$this->initId();
     }

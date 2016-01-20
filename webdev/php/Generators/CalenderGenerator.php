@@ -8,7 +8,7 @@ $oneDayInSec = 3600 * 24;
 class Calendar {
 
     private $month, $year;
-    private $marked = Array();
+    private $marked = [];
     private $firstOfMonth;
 
     /**
@@ -144,14 +144,14 @@ class Calendar {
 	$finalString = '<tr>';
 	for ($i = 0; $i < 7; $i++) {
 	    $curDate = $startday + $i * $oneDayInSec + $rowNum * 7 * $oneDayInSec;
-	    $link = Array('', '');
+	    $link = ['', ''];
 	    $style = '';
 	    //If date not from current month: mark as outdated
 	    if (date('n', $curDate) != $this->month) {
 		$style = 'class="outDated"';
 	    } else if ($this->isMarked(date('j', $curDate))) {
 		$style = 'class="marked" style="background-color:' . $this->marked[date('j', $curDate)] . '"';
-		$link = Array('<a href="?date=' . date('d.m.Y', $curDate) . '">', '</a>');
+		$link = ['<a href="?date=' . date('d.m.Y', $curDate) . '">', '</a>'];
 	    }
 	    $finalString.= "<td $style>" . $link[0] . date('d', $curDate) . $link[1] . '</td>';
 	    //Checks wheather the current day is the last one in this month

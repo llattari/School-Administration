@@ -2,7 +2,7 @@
 
 class Homework {
     private $id;
-    private $material = Array();
+    private $material = [];
 
     /**
      * Constructor

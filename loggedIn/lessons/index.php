@@ -43,9 +43,9 @@ if ($_SESSION['teacher']) {
     <table>
 	<?php
 	//Making the table head
-	$cols = Array('Name');
+	$cols = ['Name'];
 	if ($_SESSION['teacher']) {
-	    $cols = array_merge($cols, Array('Attending', 'Homework'));
+	    $cols = array_merge($cols, ['Attending', 'Homework']);
 	}
 	$tableHead = array_push($cols, 'Mail');
 	echo generateTableHead($tableHead);

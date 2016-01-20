@@ -30,7 +30,7 @@ function createSESSION($query) {
     }
     $_SESSION['teacher'] = is_null($row['grade']);
     //Setting the UI settings
-    $_SESSION['ui'] = Array();
+    $_SESSION['ui'] = [];
     foreach ($row as $key => $value) {
 	$_SESSION['ui'][$key] = $value;
     }

@@ -8,20 +8,20 @@ $HTML->outputHeader();
 
 if(isset($_GET['username'])){
     $uname = escapeStr($_GET['username']);
-    $name = Array(
+    $name = [
 	'name' => escapeStr($_GET['name']),
 	'surname' => escapeStr($_GET['lastName'])
-    );
+    ];
     $mailPassword = (bool) $_GET['mailPassword'];
     $bday = strtotime($_GET['bday']);
     //Contact information
-    $adress = Array(
+    $adress = [
 	'street' => escapeStr($_GET['street']),
 	'zip' => escapeStr($_GET['zip']),
 	'city' => escapeStr($_GET['city']),
 	'tel' => escapeStr($_GET['telephone']),
 	'mail' => escapeStr($_GET['eMail'])
-    );
+    ];
     $type = $_GET['type'];
     if($type == "s"){
 	$schoolInformation = (int) $_GET['grade'];

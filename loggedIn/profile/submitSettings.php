@@ -10,7 +10,7 @@ session_start();
 $suc = true;
 if(isset($_POST['newPswOne']) && isset($_POST['newPswTwo'])){
     $old = $_POST['oldPsw'];
-    $new = Array($_POST['newPswOne'], $_POST['newPswTwo']);
+    $new = [$_POST['newPswOne'], $_POST['newPswTwo']];
     if($new[0] === $new[1]){
 //	todo: Setting the user password once and for all
 	$suc = safeQuery('UPDATE user__password SET password = MD5("' . $new[0] . '") WHERE id=' . $_SESSION['studentId'] . ';');

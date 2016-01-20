@@ -8,8 +8,8 @@ $destination = 'index.php';
 
 # Getting the values form the old form
 $lessonId = (int) $_POST['lessonId'];
-$attendedPOST = isset($_POST['attend']) ? $_POST['attend'] : Array(); //Array of int
-$homeworkPOST = isset($_POST['homework']) ? $_POST['homework'] : Array(); //Array of int
+$attendedPOST = isset($_POST['attend']) ? $_POST['attend'] : []; //Array of int
+$homeworkPOST = isset($_POST['homework']) ? $_POST['homework'] : []; //Array of int
 #Checking invalid class id
 if ($lessonId < 1) {
     Message::castMessage('Invalid class id', false, $destination);
@@ -20,12 +20,12 @@ $attendedId = array_filter(array_map('intval', $attendedPOST), 'validId');
 $homeworkId = array_filter(array_map('intval', $homeworkPOST), 'validId');
 
 #Creating a bool array for sql
-$boolArray = Array();
+$boolArray = [];
 for ($i = 0; $i < count($attendedId); $i++) {
     $value = 'true, ';
     $value.= in_array($attendedId[$i], $homeworkId) ? 'true' : 'false';
     $boolArray[$attendedId[$i]] = $value;
-    $homeworkId = array_diff($homeworkId, Array($attendedId[$i]));
+    $homeworkId = array_diff($homeworkId, [$attendedId[$i]]);
 }
 
 $homeworkButNotHere = array_merge($homeworkId);

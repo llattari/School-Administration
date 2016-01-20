@@ -50,7 +50,7 @@ if (isset($_GET['date']) && isDate($_GET['date'])) {
 	    (not private OR (private AND creatorID = ' . $_SESSION['studentId'] . '));'
     );
 
-    $RandCol = Array('green', 'red', 'blue', 'yellow', 'orange', 'grey');
+    $RandCol = ['green', 'red', 'blue', 'yellow', 'orange', 'grey'];
 
     if (mysql_num_rows($result) != 0) {
 	$eventID = 0;

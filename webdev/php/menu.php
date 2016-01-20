@@ -8,7 +8,7 @@ require_once 'Generators/Menugenerator/MenuGenerator.php';
 	$perms = getPermission();
 	//Setting the Menu
 	$menu = new MenuGenerator();
-	$items = Array();
+	$items = [];
 
 	//General overview
 	$items[0] = new MenuEntry('index.php', 'Overview');

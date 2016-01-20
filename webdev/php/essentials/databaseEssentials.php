@@ -58,9 +58,9 @@ function safeQuery($query, $debug = true) {
  */
 function getFields($querry, $all = true) {
     if (!$querry) {
-	return Array();
+	return [];
     }
-    $result = Array();
+    $result = [];
     $numFields = mysql_num_fields($querry);
     for ($i = 0; $i < $numFields; $i++) {
 	$fieldName = mysql_field_name($querry, $i);

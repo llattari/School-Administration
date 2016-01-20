@@ -5,11 +5,11 @@ namespace HTMLGenertator;
 class Header {
 
     private $title;
-    private $cssFiles = Array('main.css', 'menu.css');
-    private $jsFiles = Array('messageMovement.js');
-    private $otherInformation = Array();
+    private $cssFiles = ['main.css', 'menu.css'];
+    private $jsFiles = ['messageMovement.js'];
+    private $otherInformation = [];
     private $mode = HeaderMode::NORMALMODE;
-    private $metaInformation = Array('charset' => HeaderMode::DEFAULTCHARSET);
+    private $metaInformation = ['charset' => HeaderMode::DEFAULTCHARSET];
 
     //Constructor for the object
     public function __construct($pageTitle = NULL, $mode = NULL) {

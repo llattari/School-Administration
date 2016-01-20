@@ -2,7 +2,7 @@
 
 function getPermission() {
     $result = safeQuery('SELECT * FROM user__permission WHERE id = ' . $_SESSION['studentId'] . ';');
-    $perms = Array();
+    $perms = [];
     if ($result) {
 	$row = mysql_fetch_assoc($result);
 	unset($row['id']);

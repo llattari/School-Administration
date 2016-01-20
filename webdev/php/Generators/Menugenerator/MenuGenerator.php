@@ -26,7 +26,7 @@ function getRootURL($url) {
 
 class MenuGenerator {
 
-    private $menuItems = Array();
+    private $menuItems = [];
 
     /**
      * addItem($newItem)

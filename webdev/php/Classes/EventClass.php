@@ -4,7 +4,7 @@ class EventClass {
     private $id = 0;
     private $name = '';
     private $description = '';
-    private $times = Array(0, 0);
+    private $times = [0, 0];
 
     public function __construct($id) {
 	$this->id = (int) $id;
@@ -16,7 +16,7 @@ class EventClass {
 	}else{
 	    $this->description = $row[1];
 	}
-	$this->times = Array($row[2], $row[3]);
+	$this->times = [$row[2], $row[3]];
     }
 
     public function getId() {

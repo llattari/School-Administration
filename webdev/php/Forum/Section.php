@@ -86,7 +86,7 @@ class Section {
      * @return array
      */
     public function getSubList() {
-	$result = Array();
+	$result = [];
 	if ($this->type == 'forum') {
 	    $database = 'forum__topic';
 	} elseif ($this->type == 'topic') {

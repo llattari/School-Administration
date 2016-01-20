@@ -52,14 +52,14 @@ if (mysql_num_rows($result) == 0) {
 		LEFT JOIN course__tests
 		ON course__student.classID = course__tests.classId
 		WHERE course__tests.id = ' . $id . ';');
-		$markArray = Array();
+		$markArray = [];
 		while ($student = mysql_fetch_array($allStudents)) {
-		    $markArray[$student[0]] = Array();
+		    $markArray[$student[0]] = [];
 		}
 		while ($row = mysql_fetch_assoc($students)) {
 		    $sId = intval($row['studentId']);
 		    if (!isset($markArray[$sId])) {
-			$markArray[$sId] = Array();
+			$markArray[$sId] = [];
 		    }
 		    array_push($markArray[$sId], $row['score']);
 		}

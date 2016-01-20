@@ -8,7 +8,7 @@ connectDB();
 session_start();
 
 function getBadWords() {
-    $list = array();
+    $list = [];
     $result = safeQuery('SELECT badWord FROM chat__badWords;');
     while ($row = mysql_fetch_row($result)) {
 	array_push($list, strtolower($row[0]));

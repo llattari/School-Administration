@@ -6,7 +6,7 @@ require_once 'ClassPerson.php';
 
 class Overview {
 
-    private $mailList = Array();
+    private $mailList = [];
     private $unread = 0;
     private $trashed = false;
 
@@ -80,7 +80,7 @@ class Overview {
      * @return array
      */
     public function getIds() {
-	$result = Array();
+	$result = [];
 	foreach ($this->mailList as $mail) {
 	    array_push($result, $mail->getId());
 	}

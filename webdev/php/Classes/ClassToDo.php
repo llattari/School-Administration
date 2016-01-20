@@ -20,8 +20,8 @@ function getPriorities() {
 
 class ClassToDo {
     private $student;
-    private $tasks = Array();
-    private $prios = Array();
+    private $tasks = [];
+    private $prios = [];
 
     //constructor
     function __construct($newStudent) {

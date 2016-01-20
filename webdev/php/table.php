@@ -22,9 +22,9 @@ function getTimetable() {
     if (!$result) {
 	return '';
     }
-    $allData = Array();
+    $allData = [];
     for ($i = 0; $i < count($times); $i++) {
-	$allData[$i] = Array($times[$i]);
+	$allData[$i] = [$times[$i]];
     }
     while ($row = mysql_fetch_assoc($result)) {
 	if (is_null($row['subject'])) {
@@ -52,7 +52,7 @@ function dataToString($arrayData) {
  * @return Array
  */
 function getTimes() {
-    $times = Array();
+    $times = [];
     $result = safeQuery('SELECT start, end FROM timetable__standardTimes;');
     if ($result) {
 	for ($i = 0; $row = mysql_fetch_row($result); $i++) {

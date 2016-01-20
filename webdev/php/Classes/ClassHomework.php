@@ -2,19 +2,19 @@
 
 class ClassHomework {
     private $id;
-    private $material = Array();
+    private $material = [];
 
     //constuctor
     function __construct($id) {
 	$this->id = (int) $id;
 	#Getting the content
 	$result = safeQuery(
-		'SELECT content AS "task", 
+		'SELECT content AS "task",
 			book, sheets, others, `link`
-		FROM task__toDo 
-		LEFT JOIN hwMaterial ON 
+		FROM task__toDo
+		LEFT JOIN hwMaterial ON
 			hwMaterial.hwID = task__toDo.id
-		WHERE 
+		WHERE
 			task__toDo.id=' . $this->id . ';'
 	);
 	echo mysql_error();

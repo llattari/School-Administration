@@ -2,7 +2,7 @@
 
 class Logger extends LoggerConstants {
 
-    private $allEvents = Array();
+    private $allEvents = [];
 
     public function __construct($id = NULL) {
 	$sql = 'SELECT * FROM debug__logger';
@@ -27,7 +27,7 @@ class Logger extends LoggerConstants {
      * @return array
      */
     public function filterPeriod($start = NULL, $end = NULL) {
-	$filteredEvents = Array();
+	$filteredEvents = [];
 	//If start is null set it to be yesterday
 	$startTime = ($start == NULL) ? time() - 3600 * 24 : $start;
 	//If end is null set it to be today

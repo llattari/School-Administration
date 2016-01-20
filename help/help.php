@@ -17,8 +17,8 @@ if($topic == 0){
     }
 }
 
-$questions = Array();
-$answers = Array();
+$questions = [];
+$answers = [];
 $result = safeQuery("SELECT question, answer FROM help__main WHERE topic = $topic ORDER BY id;");
 while($row = mysql_fetch_assoc($result)){
     array_push($questions, $row['question']);

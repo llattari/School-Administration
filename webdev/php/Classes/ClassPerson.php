@@ -2,9 +2,9 @@
 
 class ClassPerson {
 
-    private $name = Array();
+    private $name = [];
     private $profilePic = NULL;
-    private $contacts = Array();
+    private $contacts = [];
     private $bDate = 0;
     private $status = 's';
     private $grade = NULL;
@@ -14,15 +14,15 @@ class ClassPerson {
 	    $result = safeQuery("SELECT * FROM user__overview WHERE id = $id;");
 	    if (mysql_num_rows($result) == 1) {
 		$row = mysql_fetch_assoc($result);
-		$this->name = array($row['name'], $row['surname'], $row['username']);
+		$this->name = [$row['name'], $row['surname'], $row['username']];
 		$this->profilePic = NULL;
-		$this->contacts = array(
+		$this->contacts = [
 		    'email' => $row['mail'],
 		    'phone' => $row['phone'],
 		    'street' => $row['street'],
 		    'zipCode' => $row['postalcode'],
 		    'region' => $row['region']
-		);
+		];
 		$this->bDate = strtotime($row['birthday']);
 		$this->status = $row['status'];
 		if ($this->status != 't') {

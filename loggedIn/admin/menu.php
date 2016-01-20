@@ -13,7 +13,7 @@ if (!in_array('admin', $perms)) {
 	<?php
 	//Setting the Menu
 	$menu = new MenuGenerator();
-	$items = Array();
+	$items = [];
 
 	//User management
 	$items[0] = new MenuEntry('admin/users/list.php', 'User administration');

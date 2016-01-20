@@ -5,14 +5,14 @@ $HTML = new \HTMLGenertator\HTMLfile('Admin pannel', ['form.css', 'table.css'], 
 $HTML->changeMenuFile(__DIR__ . '/../menu.php');
 $HTML->outputHeader();
 
-$possibleSorters = Array(
+$possibleSorters = [
     'Student-no' => 'id',
     'First name' => 'name',
     'Last name' => 'surname',
     'E-Mail' => 'mail',
     'birthday' => 'birthday',
     'grade' => 'grade',
-    'User name' => 'username');
+    'User name' => 'username'];
 $sortOrder = 'id';
 $showSystem = false;
 

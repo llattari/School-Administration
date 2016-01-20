@@ -6,7 +6,7 @@ require_once '../../webdev/php/Classes/Messages.php';
 
 $id = intval($_POST['id']);
 $list = safeQuery('SELECT CONCAT("i",studentId,"t", task) FROM marks__points WHERE testId = ' . $id . ';');
-$dataAlreadyEntered = Array();
+$dataAlreadyEntered = [];
 while ($row = mysql_fetch_row($list)) {
     array_push($dataAlreadyEntered, $row[0]);
 }

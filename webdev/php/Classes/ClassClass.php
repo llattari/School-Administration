@@ -3,7 +3,7 @@
 class StudentClass {
     private $id = 0;
     private $teacher = null;
-    private $subj = Array();
+    private $subj = [];
     private $type = '', $abbr = '';
 
     /**
@@ -27,7 +27,7 @@ class StudentClass {
 	}
 	while($row = mysql_fetch_assoc($result)){
 	    $this->teacher = $row['teacherID'];
-	    $this->subj = Array($row['subject'], $row['abbr']);
+	    $this->subj = [$row['subject'], $row['abbr']];
 	    $this->type = $row['type'];
 	    $this->abbr = $row['full'];
 	}

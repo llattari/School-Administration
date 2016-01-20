@@ -3,7 +3,7 @@
 class MenuEntry {
 
     private $link, $caption, $width;
-    private $subItems = Array();
+    private $subItems = [];
 
     /**
      * __construct($link, $caption)

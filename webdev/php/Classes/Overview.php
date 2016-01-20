@@ -37,13 +37,13 @@ class Overview {
 	    LIMIT 1;');
 	if (mysql_num_rows($result) == 1) {
 	    $row = mysql_fetch_assoc($result);
-	    return Array($row['subject'], $row['type'], $row['start'], $row['room']);
+	    return [$row['subject'], $row['type'], $row['start'], $row['room']];
 	}
 	return NULL;
     }
 
     private function getNews() {
-	$allNews = Array();
+	$allNews = [];
 	$result = safeQuery('
 	    SELECT
 		event__ticker.grade AS "grade",
@@ -84,7 +84,7 @@ class Overview {
      */
     public function getImportantNews() {
 	if (count($this->news) == 0) {
-	    return Array("None");
+	    return ["None"];
 	}
 	return $this->news;
     }

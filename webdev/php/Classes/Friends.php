@@ -2,8 +2,8 @@
 
 class Friends {
     private $id; # Int
-    private $pending = Array();
-    private $accpted = Array();
+    private $pending = [];
+    private $accpted = [];
 
     /**
      * __construct($studentId)

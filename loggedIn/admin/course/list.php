@@ -31,7 +31,7 @@ $HTML->outputHeader();
 <hr />
 <table>
     <?php
-    $conditions = Array();
+    $conditions = [];
     if (!isset($_GET['showAll'])) {
 	array_push($conditions, 'active = true');
     }
