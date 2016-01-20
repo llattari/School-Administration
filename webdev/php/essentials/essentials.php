@@ -83,15 +83,58 @@ function isDate($date) {
  * 	Generates a random string of the specified length
  * @param int $length
  * @return string
-*/
+ */
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	$randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+/**
+ * Fills the number with leading zeros
+ * @param int $number
+ * @param int $numberOfDigits (optinal: default 2)
+ * @return string
+ */
+function unsignedZeroFill($number, $numberOfDigits = 2) {
+    $wholeNumber = (int) abs($number);
+    $numberOfZeros = ($wholeNumber == 0) ? $numberOfDigits : $numberOfDigits - floor(log10($wholeNumber));
+    if ($numberOfZeros < 1) {
+	return (string) $number;
+    }
+    $result = '';
+    for ($i = 0; $i < $numberOfZeros - 1; $i++) {
+	$result.='0';
+    }
+    return $result . $wholeNumber;
+}
+//3-5e-5
+function timeString($seconds) {
+    $absSeconds = abs($seconds);
+    $result = '';
+    $biggestUnit = '';
+    if ($absSeconds >= 60 * 60 * 24) {
+	$biggestUnit = ($biggestUnit == '') ? 'd' : $biggestUnit;
+	$result.= unsignedZeroFill($absSeconds / (60 * 60 * 24)) . ':';
+	$absSeconds %= (60 * 60 * 24);
+    }
+    if ($absSeconds >= 60 * 60 || $biggestUnit != '') {
+	$biggestUnit = ($biggestUnit == '') ? 'h' : $biggestUnit;
+	$result .= unsignedZeroFill($absSeconds / (60 * 60)) . ':';
+	$absSeconds %= (60 * 60);
+    }
+    if ($absSeconds >= 60 || $biggestUnit != '') {
+	$biggestUnit = ($biggestUnit == '') ? 'd' : $biggestUnit;
+	$result .= unsignedZeroFill($absSeconds / 60) . ':';
+	$absSeconds %= 60;
+    }
+    $biggestUnit = ($biggestUnit == '') ? 's' : $biggestUnit;
+    $result .= unsignedZeroFill($absSeconds) . ' ' . $biggestUnit;
+    return $result;
 }
 
 ?>

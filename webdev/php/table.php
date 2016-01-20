@@ -6,12 +6,15 @@ function getTimetable() {
 	    course__overview.subject AS "subject",
 	    day, lesson, room
         FROM course__student
-        JOIN timetable__overview
-        ON timetable__overview.classID = course__student.classID
+        RIGHT JOIN timetable__overview
+        ON
+	    timetable__overview.classID = course__student.classID
         LEFT JOIN course__overview
         ON
 	    course__student.classID = course__overview.id
         WHERE
+	    course__student.studentID IS NULL
+	    OR
 	    course__student.studentID = ' . $_SESSION['studentId'] . '
         ORDER BY lesson, day;';
     $times = getTimes();
@@ -24,7 +27,11 @@ function getTimetable() {
 	$allData[$i] = Array($times[$i]);
     }
     while ($row = mysql_fetch_assoc($result)) {
-	$allData[$row['lesson']][$row['day']] = dataToString($row);
+	if (is_null($row['subject'])) {
+	    $allData[$row['lesson']][$row['day']] = 'Unknown course';
+	} else {
+	    $allData[$row['lesson']][$row['day']] = dataToString($row);
+	}
     }
     return $allData;
 }

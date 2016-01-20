@@ -9,16 +9,20 @@ $HTML = new HTMLGenertator\HTMLfile('Your class', ['table.css', 'form.css', 'les
 $lesson = new Lesson($_SESSION['studentId']);
 
 $HTML->outputHeader();
-if (!$lesson->takesPlace()) {
+if (!$lesson->lessonToday()) {
     ?>
     <h1>No lesson</h1>
-    <p>You have some time off. Enjoy it. :D </p>
+    <p>You have the day off. Enjoy it. :D </p>
     <?php
     $HTML->outputFooter();
     return;
+} else if ($lesson->takesPlace()) {
+    echo '<h1>Your current lesson</h1>';
+} else {
+    $timeString = timeString($lesson->getTimeToStart());
+    echo '<h1>Your next lesson is in ' . $timeString . '</h1>';
 }
 ?>
-<h1>Your current lesson</h1>
 <p class="twoCols">
     Name: <?php echo $lesson->getClassName(); ?>
     by <?php echo ClassPerson::staticGetName($lesson->getTeacherId(), $_SESSION['nickName']); ?>
@@ -48,17 +52,17 @@ if ($_SESSION['teacher']) {
 	//Querying all the students
 	$result = safeQuery(
 		'SELECT
-	    status,
-            user__overview.id AS "id",
-            CONCAT(`name`, " ", surname) AS "name"
-        FROM
-            course__student
-        JOIN user__overview
-            ON user__overview.id = course__student.studentID
-        WHERE
-            classID = ' . $lesson->getClassId() . '
-	ORDER BY
-	    status DESC, surname ASC;');
+		    status,
+		    user__overview.id AS "id",
+		    CONCAT(`name`, " ", surname) AS "name"
+		FROM
+		    course__student
+		JOIN user__overview
+		    ON user__overview.id = course__student.studentID
+		WHERE
+		    classID = ' . $lesson->getClassId() . '
+		ORDER BY
+		    status DESC, surname ASC;');
 	//Outputting them in a table
 	$img = '<img src="' . getRootURL('../webdev/images/mail.png') . '" title="Mailsymbol" style="height:1em"/>';
 	while ($row = mysql_fetch_assoc($result)) {

@@ -22,7 +22,7 @@ function timeSelector($name = NULL, $mode = 24) {
     $nameAttribM = ($name == NULL) ? '' : ' name="' . $name . 'M"';
     $finalString .= "<select$nameAttribM>";
     for ($i = 0; $i < 60; $i++) {
-	$formated = ($i < 10) ? '0' . $i : $i;
+	$formated = unsignedZeroFill($i);
 	$finalString.='<option value="' . $i . '">' . $formated . '</option>';
     }
     $finalString.= '</select>';
@@ -40,7 +40,7 @@ function timeSelector($name = NULL, $mode = 24) {
 function toTimeFormat($hours, $timeFormat = 24) {
     $normalized = $hours % 24;
     if ($timeFormat != 12) {
-	return ($normalized < 10) ? '0' . $normalized : $normalized;
+	return unsignedZeroFill($normalized);
     }
     switch ($normalized) {
 	case 0:
@@ -48,8 +48,7 @@ function toTimeFormat($hours, $timeFormat = 24) {
 	case 12:
 	    return '12 pm';
 	default:
-	    $modNormalized = $normalized % 12;
-	    $formated = ($modNormalized < 10) ? '0' . $modNormalized : $modNormalized;
+	    $formated = unsignedZeroFill($normalized % 12);
 	    if ((int) ($normalized / 12) == 0) {
 		return $formated . ' am';
 	    }

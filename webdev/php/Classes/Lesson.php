@@ -10,9 +10,8 @@ class Lesson {
      * @param timestamp $curTime
      * @return object
      */
-    function __construct($studenId, $curTime = null) {
+    function __construct($studenId) {
 	$this->id = (int) $studenId;
-	$start = is_null($curTime) ? time() : $curTime;
 	$result = safeQuery(
 		'SELECT DISTINCT
 		    course__overview.id AS "id",
@@ -26,9 +25,12 @@ class Lesson {
 		JOIN course__student ON course__overview.id = course__student.classID
 		JOIN timetable__standardTimes  ON timetable__standardTimes.id = timetable__overview.lesson
 		WHERE
-		    `day` = ' . date('N', $start) . '
-		AND ("' . date('H:i:s', $start) . '" BETWEEN timetable__standardTimes.`start` AND timetable__standardTimes.`end`)
-		AND (course__overview.teacherID = ' . $this->id . ' OR course__student.studentID = ' . $this->id . ');'
+		    `day` = ' . date('N') . '
+		AND
+		    timetable__standardTimes.`start` >= "' . date('H:i:s') . '"
+		AND
+		    (course__overview.teacherID = ' . $this->id . ' OR course__student.studentID = ' . $this->id . ')
+		LIMIT 1;'
 	);
 	if (mysql_num_rows($result) == 0) {
 	    $this->valid = false;
@@ -74,7 +76,6 @@ class Lesson {
     }
 
     /**
-     * getClassId()
      * Returns the id of the class
      * @return int
      */
@@ -92,7 +93,6 @@ class Lesson {
     }
 
     /**
-     * getTeacherId()
      * Returns the id of the teacher
      * @return int
      */
@@ -101,7 +101,6 @@ class Lesson {
     }
 
     /**
-     * getStartingTime()
      * Returns the time the class started
      * @return string
      */
@@ -110,7 +109,15 @@ class Lesson {
     }
 
     /**
-     * getEndingTime()
+     * Return the time in seconds to the next lesson.
+     * @return int
+     */
+    public function getTimeToStart() {
+	$startUnix = strtotime($this->time[0]);
+	return $startUnix - time();
+    }
+
+    /**
      * Returns the time the class ended
      * @return string
      */
@@ -119,7 +126,6 @@ class Lesson {
     }
 
     /**
-     * getLocation()
      * Returns the time the location where the lesson takes place
      * @return string
      */
@@ -128,12 +134,22 @@ class Lesson {
     }
 
     /**
-     * takesPlace()
-     * 	    Returns wheater there is a lesson or not.
+     * Returns wheater there is a lesson or not.
+     * @return boolean
+     */
+    public function lessonToday() {
+	return $this->valid;
+    }
+
+    /**
+     * Returns wheater or not there is an active lesson ongoing.
      * @return boolean
      */
     public function takesPlace() {
-	return $this->valid;
+	$now = time();
+	$startUnix = strtotime($this->time[0]);
+	$endUnix = strtotime($this->time[1]);
+	return ($startUnix <= $now && $now <= $endUnix);
     }
 
     // </editor-fold>
