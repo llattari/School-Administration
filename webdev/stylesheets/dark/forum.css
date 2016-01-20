@@ -1,3 +1,9 @@
+#originalPost{
+    margin: .5em;
+    padding: .5em;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
 p#forumDescription{
     background-color: rgba(255, 255, 255, 0.12);
 }

@@ -17,7 +17,7 @@ if (isset($_GET['forumId'])) {
 }
 
 //Return if neither is set.
-if ($object == NULL) {
+if ($object == NULL || $intId < 1) {
     Header('Location: index.php');
 }
 $type = $object->getType();
@@ -49,11 +49,22 @@ $subList = $object->getSubList();
 		    $message = substr($subItem->getDescription(), 0, 50);
 		} else {
 		    $subItem = new Post($subList[$i]);
+		    $postId = $subItem->getId();
 		    $heading = ClassPerson::staticGetName((int) $subItem->getCreator(), $_SESSION['nickName']) . ' says: ';
 		    $message = $subItem->getMessage();
 		}
-		echo
-		"<li><h3>$heading</h3><p>$message</p></li>";
+		?>
+		<li>
+		    <h3><?php echo $heading; ?></h3>
+		    <p><?php echo $message; ?></p>
+		    <br />
+		    <?php
+		    if (isset($postId)) {
+			echo '<a href="editPost.php?id=' . $postId . '&topicId=' . $intId . '">Edit this post</a>';
+		    }
+		    ?>
+		</li>
+		<?php
 	    }
 	}
 	?>
@@ -66,8 +77,7 @@ if ($type == 'forum') {
     ?>
     <form action="postNew.php" method="POST">
         <!-- Copying data from the previous page -->
-        <input type="hidden" name="topicId" value="<?php echo $intId;
-    ?>" />
+        <input type="hidden" name="topicId" value="<?php echo $intId; ?>" />
         <!-- Textarea for the post message -->
         <fieldset>
     	<legend>New Post</legend>
@@ -77,4 +87,7 @@ if ($type == 'forum') {
     	<button type="reset">Discard</button>
         </fieldset>
     </form>
-<?php } ?>
+    <?php
+}
+$HTML->outputFooter();
+?>
